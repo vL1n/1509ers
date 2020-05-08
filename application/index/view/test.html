@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<form id="testForm" method="post" enctype="multipart/form-data">
+    <input type="file" name="image">
+    <input type="text" name="uid" value="1" hidden>
+
+</form>
+<hr>
+
+<button id="testBtn" type="submit">测试</button>
+</body>
+
+
+
+<script src="/static/js/jquery.min.js"></script>
+<script>
+    $(function () {
+        $("#testBtn").on('click', function () {
+            $.ajax({
+                type:'POST',
+                url:"{:url('/api/User/avatarUpload')}",
+                data: $("#testForm").serialize(),
+                dataType: "JSON",
+                success: function(data){
+                    console.log(data);
+                    if(data.code == 0){
+                        console.log(data.data);
+                    }else{
+                        console.log(data.data);
+                    }
+                }
+            })
+        })
+    })
+
+</script>
+</html>

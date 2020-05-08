@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>给爷爪巴</title>
+</head>
+<body>
+<h1>起飞机场:{$depCityName}</h1>
+<h1>落地机场:{$arrCityName}</h1>
+{volist name="flightInfo" id="fl"}
+<b>航班号:{$fl.flightNo}</b><span>价格:{$fl.cabin['price']}</span>
+<hr>
+{/volist}
+</body>
+</html>

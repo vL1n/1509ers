@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>爪巴爪巴爪巴-1509ers</title>
+    <link rel="shortcut icon" href="/static/img/bz.ico">
+    <link rel="apple-touch-icon-precomposed" href="/static/img/bz.png">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/adminLte/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="/static/adminLte/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="/static/adminLte/css/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="/static/adminLte/css/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/adminLte/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/static/adminLte/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="/static/adminLte/css/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="/static/adminLte/css/summernote-bs4.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+            </li>
+        </ul>
+
+<!--        &lt;!&ndash; Right navbar links &ndash;&gt;-->
+<!--        <ul class="navbar-nav ml-auto">-->
+<!--            &lt;!&ndash; Messages Dropdown Menu &ndash;&gt;-->
+<!--            <li class="nav-item dropdown">-->
+<!--                <a class="nav-link" data-toggle="dropdown" href="#">-->
+<!--                    <i class="far fa-comments"></i>-->
+<!--                    <span class="badge badge-danger navbar-badge">3</span>-->
+<!--                </a>-->
+<!--                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">-->
+<!--                    <a href="#" class="dropdown-item">-->
+<!--                        &lt;!&ndash; Message Start &ndash;&gt;-->
+<!--                        <div class="media">-->
+<!--                            <div class="media-body">-->
+<!--                                <h3 class="dropdown-item-title">-->
+<!--                                    Brad Diesel-->
+<!--                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>-->
+<!--                                </h3>-->
+<!--                                <p class="text-sm">Call me whenever you can...</p>-->
+<!--                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Message End &ndash;&gt;-->
+<!--                    </a>-->
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                    <a href="#" class="dropdown-item">-->
+<!--                        &lt;!&ndash; Message Start &ndash;&gt;-->
+<!--                        <div class="media">-->
+<!--                            <div class="media-body">-->
+<!--                                <h3 class="dropdown-item-title">-->
+<!--                                    John Pierce-->
+<!--                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>-->
+<!--                                </h3>-->
+<!--                                <p class="text-sm">I got your message bro</p>-->
+<!--                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Message End &ndash;&gt;-->
+<!--                    </a>-->
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                    <a href="#" class="dropdown-item">-->
+<!--                        &lt;!&ndash; Message Start &ndash;&gt;-->
+<!--                        <div class="media">-->
+<!--                            <div class="media-body">-->
+<!--                                <h3 class="dropdown-item-title">-->
+<!--                                    Nora Silvester-->
+<!--                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>-->
+<!--                                </h3>-->
+<!--                                <p class="text-sm">The subject goes here</p>-->
+<!--                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Message End &ndash;&gt;-->
+<!--                    </a>-->
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--            &lt;!&ndash; Notifications Dropdown Menu &ndash;&gt;-->
+<!--            <li class="nav-item dropdown">-->
+<!--                <a class="nav-link" data-toggle="dropdown" href="#">-->
+<!--                    <i class="far fa-bell"></i>-->
+<!--                    <span class="badge badge-warning navbar-badge">15</span>-->
+<!--                </a>-->
+<!--                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">-->
+<!--                    <span class="dropdown-item dropdown-header">15 Notifications</span>-->
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                    <a href="#" class="dropdown-item">-->
+<!--                        <i class="fas fa-envelope mr-2"></i> 4 new messages-->
+<!--                        <span class="float-right text-muted text-sm">3 mins</span>-->
+<!--                    </a>-->
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                    <a href="#" class="dropdown-item">-->
+<!--                        <i class="fas fa-users mr-2"></i> 8 friend requests-->
+<!--                        <span class="float-right text-muted text-sm">12 hours</span>-->
+<!--                    </a>-->
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                    <a href="#" class="dropdown-item">-->
+<!--                        <i class="fas fa-file mr-2"></i> 3 new reports-->
+<!--                        <span class="float-right text-muted text-sm">2 days</span>-->
+<!--                    </a>-->
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--        </ul>-->
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/" class="brand-link" style="text-align: center;">
+            <span class="brand-text font-weight-light">1509ers</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="info" style="text-align: center">
+                    <a href="#" class="d-block" style="align-self: center">机票查询</a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="/index/pyclimb" class="nav-link active">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>主页</p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">查询主页</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">主页</a></li>
+                            <li class="breadcrumb-item active">查询主页</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-6 connectedSortable">
+<!--                        查询表单-->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">查询表单</h3>
+                            </div>
+                            <div class="card-body">
+                                <!-- Date range -->
+                                <form class="requestForm">
+                                    <div class="form-group">
+                                        <label>输入出发地、目的地</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-plane-departure"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="出发地，例如：北京" id="dep" name="dep">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <button type="button" class="btn btn-block btn-default" onclick="transfer()" style="width: 50%;"><i class="fa fa-arrows-alt-v"></i><i class="fa fa-arrows-alt-v"></i></button>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-plane-arrival"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="目的地，例如：南宁" id="arr" name="arr">
+                                        </div>
+                                        <label>输入查询日期:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask id="date" name="date">
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <button type="button" class="btn btn-default btn-block" id="requestBtn">立即查询</button>
+                                </form>
+                                <!-- /.form group -->
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+<!--                        查询表单结束-->
+                        <div class="card card-default" id="divL"></div>
+                    </section>
+                    <!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-6 connectedSortable">
+
+                        <div class="card">
+                            <div class="card-header border-0">
+                                <h3 class="card-title">
+                                    <i class="fas fa-th mr-1"></i>
+                                    提示！
+                                </h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    这一栏暂时还只是用来搞笑的(手动狗头
+                                </div>
+                                <div class="alert alert-info alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    目前只能查询,后续会加入:持续低价搜索，低价提醒，低价统计，以及智能推荐(有生之年项目（再次手动狗头
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Sales
+                                </h3>
+                                <div class="card-tools">
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content p-0">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane active" id="revenue-chart"
+                                         style="position: relative; height: 300px;">
+                                        <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
+                                    </div>
+                                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
+                                        <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                                    </div>
+                                </div>
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- solid sales graph -->
+                        <div class="card bg-gradient-info">
+                            <div class="card-header border-0">
+                                <h3 class="card-title">
+                                    <i class="fas fa-th mr-1"></i>
+                                    Sales Graph
+                                </h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer bg-transparent">
+                                <div class="row">
+                                    <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
+                                               data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Mail-Orders</div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
+                                               data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Online</div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
+                                               data-fgColor="#39CCCC">
+
+                                        <div class="text-white">In-Store</div>
+                                    </div>
+                                    <!-- ./col -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- Map card -->
+                        <div class="card bg-gradient-primary">
+                            <div class="card-header border-0">
+                                <h3 class="card-title">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    Visitors
+                                </h3>
+                                <!-- card tools -->
+                                <div class="card-tools">
+                                    <button type="button"
+                                            class="btn btn-primary btn-sm daterange"
+                                            data-toggle="tooltip"
+                                            title="Date range">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-primary btn-sm"
+                                            data-card-widget="collapse"
+                                            data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+                            <div class="card-body">
+                                <div id="world-map" style="height: 250px; width: 100%;"></div>
+                            </div>
+                            <!-- /.card-body-->
+                            <div class="card-footer bg-transparent">
+                                <div class="row">
+                                    <div class="col-4 text-center">
+                                        <div id="sparkline-1"></div>
+                                        <div class="text-white">Visitors</div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-4 text-center">
+                                        <div id="sparkline-2"></div>
+                                        <div class="text-white">Online</div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-4 text-center">
+                                        <div id="sparkline-3"></div>
+                                        <div class="text-white">Sales</div>
+                                    </div>
+                                    <!-- ./col -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                        </div>
+                        <!-- /.card -->
+
+                    </section>
+                    <!-- right col -->
+                </div>
+                <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2019 <b>by Weilin Qin</b></strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 1.0.0
+        </div>
+    </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="/static/adminLte/js/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="/static/adminLte/js/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="/static/adminLte/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="/static/adminLte/js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="/static/adminLte/js/sparkline.js"></script>
+<!-- Select2 -->
+<script src="/static/adminLte/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="/static/adminLte/js/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/adminLte/js/bootstrap-colorpicker.min.js"></script>
+<!-- JQVMap -->
+<script src="/static/adminLte/js/jquery.vmap.min.js"></script>
+<script src="/static/adminLte/js/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="/static/adminLte/js/jquery.knob.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/adminLte/js/bootstrap-switch.min.js"></script>
+<!-- daterangepicker -->
+<script src="/static/adminLte/js/moment.min.js"></script>
+<script src="/static/adminLte/js/jquery.inputmask.bundle.min.js"></script>
+<script src="/static/adminLte/js/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/adminLte/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="/static/adminLte/js/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="/static/adminLte/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/adminLte/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="/static/adminLte/js/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/adminLte/js/demo.js"></script>
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        //Money Euro
+        $('[data-mask]').inputmask()
+
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY hh:mm A'
+            }
+        })
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges   : {
+                    'Today'       : [moment(), moment()],
+                    'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate  : moment()
+            },
+            function (start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            }
+        )
+
+        //Timepicker
+        $('#timepicker').datetimepicker({
+            format: 'LT'
+        })
+
+        //Bootstrap Duallistbox
+        $('.duallistbox').bootstrapDualListbox()
+
+        //Colorpicker
+        $('.my-colorpicker1').colorpicker()
+        //color picker with addon
+        $('.my-colorpicker2').colorpicker()
+
+        $('.my-colorpicker2').on('colorpickerChange', function(event) {
+            $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+        });
+
+        $("input[data-bootstrap-switch]").each(function(){
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+
+    })
+</script>
+<script>
+
+    function transfer() {
+        let dep = document.getElementById('dep').value;
+        let arr = document.getElementById('arr').value;
+        if(dep != ''||arr !=''){
+            let mid = arr;
+            document.getElementById('dep').value = mid;
+            document.getElementById('arr').value = dep;
+        }
+    }
+
+    function renderResult(data){
+        let date = document.getElementById('date').value;
+        console.log(date);
+        let form = $('#information');
+        let information = data.info['data'];
+        let flights = information['flight'];
+        for ( let item of flights ){
+            var depTime = item['depTime'];
+            var arrTime = item['arrTime'];
+            depTime = depTime.replace(date+' ',"");
+            arrTime = arrTime.replace(date+' ',"");
+            form.append(
+                `<div class="callout callout-info" style="padding: 20px 20px;" id="result">
+                                <table style="width: 100%;">
+                                        <tbody>
+                                            <td style="width: 20%" align="center">
+                                                <p style="font-size: 20px;">${item['flightNo']}</p>
+                                                <p style="margin-top: -20px;font-size: 7px;">${item['flightType']}</p>
+                                            </td>
+                                            <td style="width: 20%" align="center">
+                                                <p style="font-size: 18px;"><strong>${depTime}</strong></p>
+                                                <p style="margin-top: -20px;">${item['depAirport']}</p>
+                                            </td>
+                                            <td style="width: 20%" align="center">
+                                                <i class="fa fa-plane" style="color: #2e6da4"></i>
+                                            </td>
+                                            <td style="width: 20%" align="center">
+                                                <p style="font-size: 18px;"><strong>${arrTime}</strong></p>
+                                                <p style="margin-top: -20px;">${item['arrAirport']}</p>
+                                            </td>
+                                            <td  style="width: 20%" align="center">
+                                                <span>￥:</span>${item['cabin']['price']}
+                                            </td>
+                                        </tbody>
+                                </table>
+                        </div>`
+            )
+        }
+    }
+
+    $(function () {
+        $("#requestBtn").on('click', function () {
+            //清空之前的搜索记录
+            document.getElementById('divL').innerHTML = '';
+
+            //检查是否有留空
+            let dep = document.getElementById('dep').value;
+            let arr = document.getElementById('arr').value;
+            let date = document.getElementById('date').value;
+            if(dep == ''||arr == ''||date == ''){
+                alert("必填项不能为空!");
+                return false
+            }else{ //无留空，执行
+                //创建各种div
+                var div = document.getElementById("divL");
+                var div1 = document.createElement("div");
+                div1.setAttribute("id","information");
+                div1.setAttribute("class","card-body")
+                div.appendChild(div1);
+                var div = document.getElementById('information');
+                var span = document.createElement("span");
+                //渲染lodinga
+                span.innerHTML = "正在查询...请稍等";
+                div.appendChild(span);
+
+                //创建视图完毕，开始请求
+                $.ajax({
+                    type:'POST',
+                    url:"{:url('/index/pyclimb/callPythonJs')}",
+                    data: $(".requestForm").serialize(),
+                    dataType: "JSON",
+                    success: function(data){
+                        if(data.code == 1){
+                            //渲染数据
+                            renderResult(data);
+                            //数据渲染完毕，把loading去掉
+                            div.removeChild(span);
+                        }else{
+                            document.getElementById('divL').innerHTML = '';
+                            alert(data.msg);
+                        }
+                    }
+                })
+            }
+        })
+    })
+</script>
+</body>
+</html>
