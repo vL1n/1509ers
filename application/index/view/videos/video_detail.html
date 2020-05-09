@@ -1,0 +1,104 @@
+{include file="/common/head" /}
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <!-- Navbar -->
+    {include file="/common/navbar" /}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {include file="/common/sidebar" /}
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark"><b id="videoName"></b>-详情</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">主页</a></li>x
+                            <li class="breadcrumb-item"><a href="/inde/videos">电视电影</a></li>
+                            <li class="breadcrumb-item active"><b id="videoName2"></b>-详情</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-8 offset-lg-2 connectedSortable">
+                        <input type="text" value="{$video_detail}" hidden id="video_detail">
+                        <div class="card card-green">
+                            <div class="card-header">
+                                <h3 class="card-title" id="videoName3"></h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <img id="videoImg">
+                                    </div>
+                                    <div class="col-lg-8">
+                                        
+                                    </div>
+                                    <div class="col-lg-12">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </section>
+                    <!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-12 connectedSortable">
+
+                    </section>
+                    <!-- right col -->
+                </div>
+                <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+    {include file="/common/footer" /}
+</div>
+</body>
+{include file="/common/scripts" /}
+<script type="application/javascript">
+    function init() {
+        var data = document.getElementById('video_detail').value ;
+        var parsed_data = JSON.parse(data)
+        var parsed_data2 = JSON.parse(parsed_data.data)
+        renderVideoDetail(parsed_data2)
+    }
+    init();
+
+    function renderVideoDetail(data) {
+        renderVideoName(data.Name)
+        renderVideoImg(data)
+    }
+
+    function renderVideoName(title) {
+        document.getElementById('videoName').innerHTML=title;
+        document.getElementById('videoName2').innerHTML=title;
+        document.getElementById('videoName3').innerHTML=title;
+    }
+
+    function renderVideoImg(data) {
+        var img = document.getElementById('videoImg');
+        img.src = data.Cover;
+        img.alt = data.Name;
+    }
+
+</script>
+</html>

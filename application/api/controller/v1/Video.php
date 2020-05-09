@@ -32,12 +32,10 @@ class Video extends Controller
      * @param Request $request
      * @return string
      */
-    public function getVideoDetailById(Request $request){
+    public function getVideoDetailById($id){
 
-        $info = $request->param();
-        $param = $info['videoId'];
 
-        $data = exec('python /www/wwwroot/Tsin/1509/application/api/lib/Pythons/getDetailById.py '.$param);
+        $data = exec('python /www/wwwroot/Tsin/1509/application/api/lib/Pythons/getDetailById.py '.$id);
         $json_parsed_data = json_decode($data,true);
 
         return $this->jsonSuccess($json_parsed_data);

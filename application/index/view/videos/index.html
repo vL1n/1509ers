@@ -34,9 +34,9 @@
                 <!-- Main row -->
                 <div class="row">
                     <!-- Left col -->
-                    <section class="col-lg-8 offset-2 connectedSortable">
+                    <section class="col-lg-8 offset-lg-2 connectedSortable">
 <!--                        查询表单-->
-                        <div class="card card-primary">
+                        <div class="card card-green">
                             <div class="card-header">
                                 <h3 class="card-title"></h3>
                             </div>
@@ -45,13 +45,15 @@
                                 <form class="requestForm">
                                     <div class="form-group" style="text-align: center">
                                         <label>输入影片名称</label>
-                                        <div class="input-group mb-1" style="text-align: center" >
-                                            <div class="input-group-prepend"></div>
-                                            <input type="text" class="form-control" placeholder="输入你想看的影片名称" id="videoName" name="videoName">
+                                        <div class="col-lg-6 offset-lg-3">
+                                            <div class="input-group mb-1">
+                                                <div class="input-group-prepend"></div>
+                                                <input type="text" class="form-control" placeholder="输入你想看的影片名" id="videoName" name="videoName">
+                                            </div>
+                                            <button type="button" class="btn btn-default btn-block" id="requestBtn">立即查询</button>
                                         </div>
-
                                     </div>
-                                    <button type="button" class="btn btn-default btn-block" id="requestBtn">立即查询</button>
+
                                 </form>
                                 <!-- /.form group -->
                             </div>
@@ -81,31 +83,88 @@
 
     $(function () {
         $("#requestBtn").on('click', function () {
-            $.ajax({
-                type:'Get',
-                url:"{:url('/api/v1.Video/getVideoListByName')}",
-                data: $(".requestForm").serialize(),
-                dataType: "JSON",
-                success: function(data){
+            //清空之前的搜索记录
+            document.getElementById('divResult').innerHTML = '';
 
-                    // 处理返回的json数据
-                    var parsed_data = JSON.parse(data)
-                    console.log(parsed_data)
-                    if(parsed_data.code == 0){
-                        // 渲染html
-                        renderHtml(parsed_data)
+            //检查是否有留空
+            let dep = document.getElementById('videoName').value;
+            if(dep == ''){
+                alert("请先输入再查询!");
+                return false
+            }else{ //无留空，执行
+                //创建各种div
+                var div = document.getElementById("divResult");
+                var div1 = document.createElement("div");
+                div1.setAttribute("id","videoList");
+                div1.setAttribute("class","card-body")
+                div.appendChild(div1);
+                var div2 = document.getElementById('videoList');
+                var span = document.createElement("span");
+                //渲染lodinga
+                span.innerHTML = "正在为你寻找影片...请稍等";
+                div2.appendChild(span);
+
+                //创建视图完毕，开始请求
+                $.ajax({
+                    type:'POST',
+                    url:"{:url('/api/v1.Video/getVideoListByName')}",
+                    data: $(".requestForm").serialize(),
+                    dataType: "JSON",
+                    success: function(data){
+                        var data_2 = JSON.parse(data)
+                        // console.log(data_2)
+                        if(data_2.code == 0){
+                            //渲染数据
+                            renderResult(data_2.data);
+                            //数据渲染完毕，把loading去掉
+                            div2.removeChild(span);
+                        }else{
+                            document.getElementById('divResult').innerHTML = '';
+                            alert(data.msg);
+                        }
                     }
-                    else {
-                        // 渲染错误模板
-                    }
-                }
-            })
+                })
+            }
         })
     })
 
-    function renderHtml(data) {
+    function renderResult(data) {
         // 获取数据
-        var list = data.data
+        var list = JSON.parse(data)
+        let form = $('#videoList')
+        // console.log(data)
+        console.log(list)
+        for (let item of list){
+            form.append(
+                `
+                <div class="row">
+                                <div class="col-lg-3 connectedSortable">
+                                    <img src="${item['Cover']}" alt="${item['Name']}" style="width: 50%">
+                                </div>
+                                <div class="col-lg-5 connectedSortable">
+                                    <div>
+                                        <h3>${item['Name']}</h3><br/>
+                                        <b>国家/地区: ${item['Tags']}</b><br/>
+                                        <b>上映年度: ${item['Year']}</b><br/>
+                                        <b>备注:${item['MovieTitle']}</b>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-4 connectedSortable">
+                                    <div style="margin-top: 100px;margin-left: 30px;">
+                                        <button onclick="goToDetail(${item['ID']})" style="padding: 10px; border-style: none; border-radius: 5px;">点击查看详情</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr>
+                `
+            )
+        }
+    }
+
+    function goToDetail(id) {
+        window.location.href = "/index/Videos/videoDetail?id=" + id;
     }
 </script>
 </html>

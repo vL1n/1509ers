@@ -12,3 +12,13 @@
 <script src="/static/adminLte/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap Switch -->
 <script src="/static/adminLte/js/bootstrap-switch.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var path = window.location.pathname;
+        path = path.replace('/index/', '');
+        var obj = document.getElementById(path)
+        if(obj){
+            obj.setAttribute("class","nav-link active")
+        }
+    });
+</script>

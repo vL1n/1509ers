@@ -21,9 +21,3 @@ $(function () {
 
 })
 
-$(document).ready(function () {
-  var path = window.location.pathname;
-  path = path.replace('/index/', '');
-  $("#" + path).addClass('active');
-
-});
