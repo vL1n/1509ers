@@ -35,6 +35,7 @@
                 <div class="row">
                     <!-- Left col -->
                     <section class="col-lg-8 offset-2 connectedSortable">
+<!--                        查询表单-->
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title"></h3>
@@ -56,6 +57,8 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
+<!--                        查询结果-->
+                        <div class="card card-default" id="divResult"></div>
                     </section>
                     <!-- /.Left col -->
                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -84,6 +87,8 @@
                 data: $(".requestForm").serialize(),
                 dataType: "JSON",
                 success: function(data){
+
+                    // 处理返回的json数据
                     var parsed_data = JSON.parse(data)
                     console.log(parsed_data)
                     if(parsed_data.code == 0){
@@ -99,6 +104,7 @@
     })
 
     function renderHtml(data) {
+        // 获取数据
         var list = data.data
     }
 </script>
