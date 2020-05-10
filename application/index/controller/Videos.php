@@ -26,4 +26,12 @@ class Videos extends Base
         $this->assign('video_detail',$video_detail);
         return $this->fetch();
     }
+    public function play(Request $request){
+        $info = $request->param();
+        $id =$info['id'];
+        $url = $info['url'];
+        $this->assign('id',$id);
+        $this->assign('url',$url);
+        return $this->fetch();
+    }
 }

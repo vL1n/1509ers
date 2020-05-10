@@ -1,4 +1,9 @@
 {include file="/common/head" /}
+<style>
+    .btnV{
+        margin-top: 5px;
+    }
+</style>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -19,8 +24,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/">主页</a></li>x
-                            <li class="breadcrumb-item"><a href="/inde/videos">电视电影</a></li>
+                            <li class="breadcrumb-item"><a href="/">主页</a></li>
+                            <li class="breadcrumb-item"><a href="/index/videos">电视电影</a></li>
                             <li class="breadcrumb-item active"><b id="videoName2"></b>-详情</li>
                         </ol>
                     </div><!-- /.col -->
@@ -43,11 +48,22 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4" style="text-align: center">
                                         <img id="videoImg">
                                     </div>
                                     <div class="col-lg-8">
-                                        
+                                        <dl class="row">
+                                            <dt class="col-sm-4">片名</dt>
+                                            <dd class="col-sm-8" id="videoName4"></dd>
+                                            <dt class="col-sm-4">标签</dt>
+                                            <dd class="col-sm-8" id="videoTag"></dd>
+                                            <dt class="col-sm-4">集数</dt>
+                                            <dd class="col-sm-8" id="videoPlayCount"></dd>
+                                            <dt class="col-sm-4">上映年份</dt>
+                                            <dd class="col-sm-8" id="videoYear"></dd>
+                                            <dt class="col-sm-4">剧情简介</dt>
+                                            <dd class="col-sm-8" id="videoIntroduction"></dd>
+                                        </dl>
                                     </div>
                                     <div class="col-lg-12">
 
@@ -59,8 +75,19 @@
                     </section>
                     <!-- /.Left col -->
                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                    <section class="col-lg-12 connectedSortable">
+                    <section class="col-lg-8 offset-lg-2 connectedSortable">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-edit"></i>
+                                    Modal Examples
+                                </h3>
+                            </div>
+                            <div class="card-body" id="videoIndex">
 
+                            </div>
+                            <!-- /.card -->
+                        </div>
                     </section>
                     <!-- right col -->
                 </div>
@@ -85,19 +112,49 @@
 
     function renderVideoDetail(data) {
         renderVideoName(data.Name)
-        renderVideoImg(data)
+        renderVideoDes(data)
+        renderIndex(data)
     }
 
     function renderVideoName(title) {
         document.getElementById('videoName').innerHTML=title;
         document.getElementById('videoName2').innerHTML=title;
         document.getElementById('videoName3').innerHTML=title;
+        document.getElementById('videoName4').innerHTML=title;
+
     }
 
-    function renderVideoImg(data) {
+    function renderVideoDes(data) {
         var img = document.getElementById('videoImg');
+        var videoTag = document.getElementById('videoTag');
+        var videoIntroduction = document.getElementById('videoIntroduction');
+        var videoPlayCount = document.getElementById('videoPlayCount');
+        var videoYear = document.getElementById('videoYear');
         img.src = data.Cover;
         img.alt = data.Name;
+        videoTag.innerHTML = data.Tags;
+        videoIntroduction.innerHTML = data.Introduction;
+        videoPlayCount.innerHTML = data.PlayCount;
+        videoYear.innerHTML = data.Year;
+    }
+
+    function renderIndex(data) {
+        let form = $('#videoIndex')
+        // console.log(data.MoviePlayUrls)
+        var items = data.MoviePlayUrls
+        for(let i = 0; i < items.length; i++){
+            form.append("<button type=\"button\" class=\"btn btn-default btnV\" onclick='" + goToPlay(items[i].PlayUrl) + "'>"+items[i].Name+"</button>")
+        }
+    }
+
+    function goToPlay(url) {
+        console.log(url)
+        return false
+        var data = document.getElementById('video_detail').value;
+        var parsed_data = JSON.parse(data);
+        var parsed_data2 = JSON.parse(parsed_data.data);
+        var id = parsed_data2.ID;
+        window.location.href = "/index/Videos/play?id="+id+"&url="+url;
     }
 
 </script>

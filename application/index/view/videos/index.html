@@ -132,32 +132,36 @@
         // 获取数据
         var list = JSON.parse(data)
         let form = $('#videoList')
-        // console.log(data)
-        console.log(list)
         for (let item of list){
             form.append(
                 `
                 <div class="row">
-                                <div class="col-lg-3 connectedSortable">
+                                <div class="col-lg-3 connectedSortable" style="text-align: center">
                                     <img src="${item['Cover']}" alt="${item['Name']}" style="width: 50%">
                                 </div>
                                 <div class="col-lg-5 connectedSortable">
+                                    <blockquote>
+                                      <h3>${item['Name']}</h3>
+                                    </blockquote>
+                                    <dl class="row">
+                                        <dt class="col-sm-4">国家/地区:</dt>
+                                        <dd class="col-sm-8">${item['Tags']}</dd>
+                                        <dt class="col-sm-4">上映年度:</dt>
+                                        <dd class="col-sm-8">${item['Year']}</dd>
+                                        <dt class="col-sm-4">备注:</dt>
+                                        <dd class="col-sm-8">${item['MovieTitle']}</dd>
+                                    </dl>
+                                    <hr>
                                     <div>
-                                        <h3>${item['Name']}</h3><br/>
-                                        <b>国家/地区: ${item['Tags']}</b><br/>
-                                        <b>上映年度: ${item['Year']}</b><br/>
-                                        <b>备注:${item['MovieTitle']}</b>
+                                        <button onclick="goToDetail(${item['ID']})" type="button" class="btn btn-block btn-outline-info">点击查看详情</button>
                                     </div>
-
                                 </div>
                                 <div class="col-lg-4 connectedSortable">
-                                    <div style="margin-top: 100px;margin-left: 30px;">
-                                        <button onclick="goToDetail(${item['ID']})" style="padding: 10px; border-style: none; border-radius: 5px;">点击查看详情</button>
-                                    </div>
+
 
                                 </div>
                             </div>
-                            <hr>
+                            <hr style="color: #2e6da4">
                 `
             )
         }
