@@ -10,9 +10,4 @@ class Dashboard extends Base
 
         return $this->fetch();
     }
-
-    public function testHtml(){
-
-        return $this->fetch();
-    }
 }

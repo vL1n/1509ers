@@ -30,7 +30,9 @@ class Videos extends Base
         $info = $request->param();
         $id =$info['id'];
         $url = $info['url'];
-        $this->assign('id',$id);
+        $video = new Video();
+        $video_detail = $video->getVideoDetailById($id);
+        $this->assign('video_detail',$video_detail);
         $this->assign('url',$url);
         return $this->fetch();
     }
