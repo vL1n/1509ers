@@ -34,7 +34,7 @@
                 <!-- Main row -->
                 <div class="row">
                     <!-- Left col -->
-                    <section class="col-lg-8 offset-lg-2 connectedSortable">
+                    <section class="col-sm-12 col-lg-8 offset-lg-2 connectedSortable">
 <!--                        查询表单-->
                         <div class="card card-green">
                             <div class="card-header">
@@ -107,7 +107,7 @@
                 //创建视图完毕，开始请求
                 $.ajax({
                     type:'POST',
-                    url:"{:url('/api/v1.Video/getVideoListByName')}",
+                    url:"{:url('/api/v1.Pythondata/getVideoListByName')}",
                     data: $(".requestForm").serialize(),
                     dataType: "JSON",
                     success: function(data){
@@ -168,7 +168,7 @@
     }
 
     function goToDetail(id) {
-        window.location.href = "/index/Videos/videoDetail?id=" + id;
+        window.location.href = "/index/videos/videoDetail?id=" + id;
     }
 </script>
 </html>

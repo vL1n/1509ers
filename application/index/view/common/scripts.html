@@ -15,8 +15,9 @@
 <script>
     $(document).ready(function () {
         var path = window.location.pathname;
-        path = path.replace('/index/', '');
-        var obj = document.getElementById(path)
+        var path2 = path.split('/');
+        var tree = path2[2];
+        var obj = document.getElementById(tree)
         if(obj){
             obj.setAttribute("class","nav-link active")
         }

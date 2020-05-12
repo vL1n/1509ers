@@ -41,7 +41,7 @@
                 <!-- Main row -->
                 <div class="row">
                     <!-- Left col -->
-                    <section class="col-lg-8 offset-lg-2 connectedSortable">
+                    <section class="col-lg-8 offset-lg-2 col-sm-12 connectedSortable">
                         <input type="text" value="{$video_detail}" hidden id="video_detail">
                         <div class="card card-green">
                             <div class="card-header">
@@ -76,7 +76,7 @@
                     </section>
                     <!-- /.Left col -->
                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                    <section class="col-lg-8 offset-lg-2 connectedSortable">
+                    <section class="col-lg-8 offset-lg-2 col-sm-12 connectedSortable">
                         <div class="card card-primary card-outline">
                             <div class="card-header">
                                 <h3 class="card-title">
@@ -156,7 +156,7 @@
         var parsed_data = JSON.parse(data);
         var parsed_data2 = JSON.parse(parsed_data.data);
         var id = parsed_data2.ID;
-        window.location.href = "/index/Videos/play?id="+id+"&url="+url;
+        window.location.href = "/index/videos/play?id="+id+"&url="+url;
     }
 
 </script>
