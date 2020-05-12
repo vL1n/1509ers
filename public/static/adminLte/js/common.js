@@ -21,3 +21,14 @@ $(function () {
 
 })
 
+$(document).ready(function () {
+  var path = window.location.pathname;
+  var path2 = path.split('/');
+  var tree = path2[2];
+  var obj = document.getElementById(tree)
+  var title = document.getElementById('html_title')
+  title.innerHTML = path2[2]+'-1509ers';
+  if(obj){
+    obj.setAttribute("class","nav-link active")
+  }
+});

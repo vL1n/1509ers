@@ -35,6 +35,34 @@
                 <div class="row">
                     <!-- Left col -->
                     <section class="col-sm-12 col-lg-8 offset-lg-2 connectedSortable">
+<!--                        查询表单-->
+                        <div class="card card-pink">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                            </div>
+                            <div class="card-body">
+                                <!-- Date range -->
+                                <form class="requestForm">
+                                    <div class="form-group" style="text-align: center">
+                                        <label>请输入题目</label>
+                                        <br>
+                                        <label>请不要输入字符(例如\ /  ( ) 等,否则将会无法查询)</label>
+                                        <div class="col-lg-6 offset-lg-3">
+                                            <div class="input-group mb-1">
+                                                <div class="input-group-prepend"></div>
+                                                <input type="text" class="form-control" placeholder="请输入题目" id="keyword" name="keyword">
+                                            </div>
+                                            <button type="button" class="btn btn-default btn-block" id="requestBtn">立即查询</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                                <!-- /.form group -->
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+<!--                        查询结果-->
+                        <div class="card card-default" id="divResult"></div>
                     </section>
                     <!-- /.Left col -->
                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -53,4 +81,66 @@
 </div>
 </body>
 {include file="/common/scripts" /}
+<script>
+    $(function () {
+        $("#requestBtn").on('click', function () {
+            //清空之前的搜索记录
+            document.getElementById('divResult').innerHTML = '';
+
+            //检查是否有留空
+            let k = document.getElementById('keyword').value;
+            if(k == ''){
+                alert("请先输入再查询!");
+                return false
+            }else{ //无留空，执行
+                //创建各种div
+                var div = document.getElementById("divResult");
+                var div1 = document.createElement("div");
+                div1.setAttribute("id","answers");
+                div1.setAttribute("class","card-body")
+                div.appendChild(div1);
+                var div2 = document.getElementById('answers');
+                var span = document.createElement("span");
+                //渲染lodinga
+                span.innerHTML = "正在为你寻找答案...请稍等";
+                div2.appendChild(span);
+
+                //创建视图完毕，开始请求
+                $.ajax({
+                    type:'GET',
+                    url:"{:url('/api/v1.Pythondata/searchQuestion')}",
+                    data: $(".requestForm").serialize(),
+                    dataType: "JSON",
+                    success: function(data){
+                        var data_2 = JSON.parse(data)
+                        var data_3 = JSON.parse(data_2.data)
+                        console.log(data)
+                        if(data_2.code == 0){
+                            //渲染数据
+                            renderResult(data_3.data);
+                            //数据渲染完毕，把loading去掉
+                            div2.removeChild(span);
+                        }else{
+                            document.getElementById('divResult').innerHTML = '';
+                            alert(data.msg);
+                        }
+                    }
+                })
+            }
+        })
+    })
+
+    function renderResult(data){
+        console.log(data)
+        var resCard = $('#answers')
+        for(var i = 0;i < data.length; i++){
+            resCard.append(`
+                <div class="callout callout-success">
+                     <h6>题目:${data[i].q}</h6>
+                     <b style="color: green">答案:${data[i].a}</b>
+                </div>
+            `)
+        }
+    }
+</script>
 </html>
