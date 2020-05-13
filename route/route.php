@@ -9,6 +9,9 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
+Route::domain('test','test');
+Route::domain('mobile','mobile');
+Route::domain('admin','admin');
 
 return [
 
