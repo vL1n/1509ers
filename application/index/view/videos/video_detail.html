@@ -145,18 +145,18 @@
         var items = data.MoviePlayUrls
         for(let i = 0; i < items.length; i++){
             form.append(`
-            <button type="button" class="btn btn-default btnV" onclick="goToPlay('${items[i].PlayUrl}')">${items[i].Name}</button>
+            <button type="button" class="btn btn-default btnV" onclick="goToPlay('${items[i].PlayUrl}','${items[i].Name}')">${items[i].Name}</button>
             `)
         }
     }
 
-    function goToPlay(url) {
+    function goToPlay(url,name) {
         console.log(url)
         var data = document.getElementById('video_detail').value;
         var parsed_data = JSON.parse(data);
         var parsed_data2 = JSON.parse(parsed_data.data);
         var id = parsed_data2.ID;
-        window.location.href = "/index/Videos/play?id="+id+"&url="+url;
+        window.location.href = "/index/Videos/play?id="+id+"&url="+url+'&name='+name;
     }
 
 </script>

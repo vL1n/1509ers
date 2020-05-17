@@ -38,10 +38,12 @@ class Videos extends Base
         $info = $request->param();
         $id =$info['id'];
         $url = $info['url'];
+        $name = $info['name'];
         $video = new Pythondata();
         $video_detail = $video->getVideoDetailById($id);
         $this->assign('video_detail',$video_detail);
         $this->assign('url',$url);
+        $this->assign('name',$name);
         return $this->fetch();
     }
 }

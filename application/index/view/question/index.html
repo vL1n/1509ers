@@ -98,7 +98,8 @@
                 var div1 = document.createElement("div");
                 div1.setAttribute("id","answers");
                 div1.setAttribute("class","card-body")
-                div.appendChild(div1);
+                div.appendChild(div1);0
+
                 var div2 = document.getElementById('answers');
                 var span = document.createElement("span");
                 //渲染lodinga
@@ -114,9 +115,11 @@
                     success: function(data){
                         var data_2 = JSON.parse(data)
                         var data_3 = JSON.parse(data_2.data)
-                        console.log(data)
                         if(data_2.code == 0){
                             //渲染数据
+                            if(data_3.data == undefined){
+                                span.innerHTML = "找不到结果,请带着以下信息联系管理员: "+data_3.msg;
+                            }
                             renderResult(data_3.data);
                             //数据渲染完毕，把loading去掉
                             div2.removeChild(span);
@@ -131,7 +134,6 @@
     })
 
     function renderResult(data){
-        console.log(data)
         var resCard = $('#answers')
         for(var i = 0;i < data.length; i++){
             resCard.append(`

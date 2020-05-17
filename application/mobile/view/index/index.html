@@ -5,37 +5,20 @@
     <title>1509</title>
     <link rel="shortcut icon" href="/static/img/bz.ico">
     <link rel="apple-touch-icon-precomposed" href="/static/img/bz.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-<h1 style="font-size: 300px;margin-left: 100px;margin-top: 0px;">:)</h1>
-<h1 style="margin-left: 50px;font-size: 100px;">Hello, 1509er ~~</h1>
-<h1 style="margin-left: 50px;margin-top: -80px;" id="pastTime">Working In Progress!</h1>
-
-<h5 style="margin-top: 800px;margin-left: 50px;">copyright @ 1509 WorkTeam</h5>
+<div class="clock" style="margin: 0 auto;"></div>
+<div>
+    <p id="pastTime"></p>
+</div>
 </body>
 </html>
-<script type="text/javascript">
-    setInterval(function() {
-        let date1 = '2018/06/08 17:00:00';  //开始时间
-        let date2 = new Date();    //结束时间
-        let date3 = date2.getTime() - new Date(date1).getTime();   //时间差的毫秒数
+<script type="text/javascript" src='/static/js/react.min.js'></script>
+<script type="text/javascript" src='/static/js/react-dom.min.js'></script>
+<script type="text/javascript" src='/static/js/polyfill.min.js'></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
 
-        //计算出相差天数
-        let days = Math.floor(date3 / (24 * 3600 * 1000))
-
-        //计算出小时数
-
-        let leave1 = date3 % (24 * 3600 * 1000)    //计算天数后剩余的毫秒数
-        let hours = Math.floor(leave1 / (3600 * 1000))
-        //计算相差分钟数
-        let leave2 = leave1 % (3600 * 1000)        //计算小时数后剩余的毫秒数
-        let minutes = Math.floor(leave2 / (60 * 1000))
-        //计算相差秒数
-        let leave3 = leave2 % (60 * 1000)      //计算分钟数后剩余的毫秒数
-        let seconds = Math.round(leave3 / 1000)
-	let days2 = days - 365  //玉富毕业天数计算
-        let pastTime = " 距离我们毕业已经过去了 " + days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒 ";
-        document.getElementById("pastTime").innerHTML = pastTime;
-    },1000)
-</script>
 

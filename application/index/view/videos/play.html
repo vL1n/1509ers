@@ -40,7 +40,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/">主页</a></li>
                             <li class="breadcrumb-item"><a href="/index/videos">电视电影</a></li>
-                            <li class="breadcrumb-item active">正在播放--<b id="videoName"></b></li>
+                            <li class="breadcrumb-item active">正在播放--<b id="videoName"></b>--{$name}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -62,7 +62,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="fas fa-play"></i>
-                                    正在播放--<b id="videoName2"></b>
+                                    正在播放--<b id="videoName2"></b>--{$name}
                                 </h3>
                             </div>
                             <div class="card-body">
@@ -134,17 +134,17 @@
         var items = data.MoviePlayUrls
         for(let i = 0; i < items.length; i++){
             form.append(`
-            <button type="button" class="btn btn-default btnV" onclick="goToPlay('${items[i].PlayUrl}')">${items[i].Name}</button>
+            <button type="button" class="btn btn-default btnV" onclick="goToPlay('${items[i].PlayUrl}','${items[i].Name}')">${items[i].Name}</button>
             `)
         }
     }
-    function goToPlay(url) {
+    function goToPlay(url,name) {
         console.log(url)
         var data = document.getElementById('video_detail').value;
         var parsed_data = JSON.parse(data);
         var parsed_data2 = JSON.parse(parsed_data.data);
         var id = parsed_data2.ID;
-        window.location.href = "/index/Videos/play?id="+id+"&url="+url;
+        window.location.href = "/index/Videos/play?id="+id+"&url="+url+'&name='+name;
     }
 
 
