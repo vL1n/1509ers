@@ -2,6 +2,7 @@
 
 namespace app\common\model;
 
+
 use app\common\error\apiErrCode;
 use app\common\jsonResponse\JsonResponse;
 use think\Exception;
@@ -82,7 +83,7 @@ class User extends Model
     }
 
     /**
-     * 根据所给索引查询信息
+     * 根据所给索引查询信息是否存在
      * @param $field
      * @param $value
      * @return false|string
@@ -97,5 +98,24 @@ class User extends Model
             return $this->jsonData(apiErrCode::ERR_UNKNOWN[0],$e->getMessage());
         }
         return $this->jsonSuccess();
+    }
+
+    /**
+     * 通过传入的字段直接查询
+     * @param $field
+     * @param $value
+     * @return false|string
+     */
+    public function getUserInfoByField($field,$value){
+        try {
+            $res = $this->where($field,$value)->findOrEmpty()->toArray();
+            if(empty($res)){
+                return $this->jsonData(apiErrCode::USR_NOEXIST[0],apiErrCode::USR_NOEXIST[1]);
+            }
+        }
+        catch (Exception $e){
+            return $this->jsonData(apiErrCode::ERR_UNKNOWN[0],$e->getMessage());
+        }
+        return $this->jsonData(apiErrCode::SUCCESS[0],apiErrCode::SUCCESS[1],$res);
     }
 }

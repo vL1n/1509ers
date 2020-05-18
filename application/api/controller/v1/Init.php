@@ -28,7 +28,13 @@ class Init extends Controller
         // 获取请求参数
         $info = $request->param();
         $user = new \app\common\model\User();
-        $userInfo = $user->getUserInfoByUserName($info['username']);
+        $type = $info['loginType'];
+        if($type != 'phone' && $type != 'email'){
+            return $this->jsonData(apiErrCode::ERR_LOGIN_TYPE[0],apiErrCode::ERR_LOGIN_TYPE[1]);
+        }
+
+        //从模型中查询信息并解码
+        $userInfo = $user->getUserInfoByField($type,$info['param']);
         $userInfo_decode = json_decode($userInfo);
         // 模型返回异常
         if($userInfo_decode->code != 0){
