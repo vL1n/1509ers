@@ -36,6 +36,7 @@ class apiErrCode
     const EXIST_USER_INFO   =   [1016, '已存在该用户信息'];
     const ILLEGAL_REQUEST   =   [1017, '非法请求'];
     const REQUEST_TIME_OUT  =   [1018, '请求超时'];
+    const ILLEGAL_SIGN      =   [1019, '非法签名'];
 
     /**
      * 注册异常
@@ -47,7 +48,6 @@ class apiErrCode
      * 上传异常
      *
      */
-
     const UPLOAD_ERROR      =   [1050, '上传出错'];
     const ERR_FILE_TYPE     =   [1051, '错误的文件格式'];
     const ERR_FILE_SIZE     =   [1052, '文件过大！'];
