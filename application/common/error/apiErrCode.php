@@ -34,6 +34,8 @@ class apiErrCode
     const ERR_UPDATE_TOKEN  =   [1014, '更新token失败'];
     const ILLEGAL_TOKEN     =   [1015, '非法token'];
     const EXIST_USER_INFO   =   [1016, '已存在该用户信息'];
+    const ILLEGAL_REQUEST   =   [1017, '非法请求'];
+    const REQUEST_TIME_OUT  =   [1018, '请求超时'];
 
     /**
      * 注册异常
