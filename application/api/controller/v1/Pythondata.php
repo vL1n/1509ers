@@ -46,10 +46,13 @@ class Pythondata extends Controller
      * @param Request $request
      * @return string
      */
-    public function getVideoDetailById($id){
+    public function getVideoDetailById(Request $request){
+
+        $info = $request->param();
+        $param = $info['id'];
 
         $pythonName = 'getDetailById';
-        $data = $this->getDataFromPython($pythonName,$id);
+        $data = $this->getDataFromPython($pythonName,$param);
         return $this->jsonSuccess($data);
     }
 

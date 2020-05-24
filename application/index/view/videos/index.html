@@ -106,7 +106,7 @@
                 //创建视图完毕，开始请求
                 $.ajax({
                     type:'POST',
-                    url:"{:url('/api/v1.Pythondata/getVideoListByName')}",
+                    url:"{:url('/index/Videos/getVideoList')}",
                     data: $(".requestForm").serialize(),
                     dataType: "JSON",
                     success: function(data){

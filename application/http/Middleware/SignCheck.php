@@ -47,7 +47,9 @@ class SignCheck
 
         // 时间超过十秒（十三位时间戳）
 
-        if($time - $param['time'] > 600){
+        $time_out = Config::get('Time_out');
+
+        if($time - $param['time'] > $time_out){
             return $this->jsonInstanceData(apiErrCode::REQUEST_TIME_OUT[0],apiErrCode::REQUEST_TIME_OUT[1]);
         }
         return $next($request);
