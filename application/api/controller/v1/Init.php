@@ -105,4 +105,8 @@ class Init extends Controller
 
     }
 
+    public function test(){
+        return 'hello';
+    }
+
 }

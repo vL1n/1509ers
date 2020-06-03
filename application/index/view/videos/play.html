@@ -67,6 +67,7 @@
                             </div>
                             <div class="card-body">
                                 <div id="dplayer"></div>
+                                <div id="stats"></div>
                             </div>
                             <!-- /.card -->
                         </div>
@@ -100,6 +101,7 @@
 {include file="/common/scripts" /}
 <script src="/static/js/hls.js"></script>
 <script src="/static/js/DPlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cdnbye@latest"></script>
 <script>
     $(function () {
         var data = document.getElementById('video_detail').value ;
@@ -108,19 +110,113 @@
         var parsed_data2 = JSON.parse(parsed_data.data)
         renderVideoName(parsed_data2)
         renderIndex(parsed_data2)
-        const dp = new DPlayer({
-            container: document.getElementById('dplayer'),
-            logo: '/static/img/logo.png',
-            video: {
-                url: url,
-                type: 'hls',
-            },
-            pluginOptions: {
-                hls: {
-                    // hls config
+        var isWap = false;
+        if(!isWap){
+            if(url.indexOf(".m3u8") > 0){
+                var _peerId = '', _peerNum = 0, _totalP2PDownloaded = 0, _totalP2PUploaded = 0;
+                var type = 'customHls';
+            }
+            else {
+                var type = 'normal'; //MP4格式P2P兼容性不好，不调用P2P。
+            }
+            type = "customHls";
+            var dp = new DPlayer({
+                container: document.getElementById('dplayer'),
+                autoplay: false,//自动播放
+                lang:"zh-cn",//语言
+                screenshot:true,//截图
+                hotkey: true,  //热键
+                preload:"auto",//预加载
+                logo: '/static/img/logo.png',
+                video: {
+                    url:url,
+                    pic: '',  //封面
+                    type: type,
+                    customType: {
+                        'customHls': function (video, player) {
+                            const hls = new Hls({
+                                debug: false,
+                                p2pConfig: {
+                                    logLevel: true,
+                                    live: false,        // 如果是直播设为true
+                                }
+                            });
+                            hls.loadSource(video.src);
+                            hls.attachMedia(video);
+                            hls.p2pEngine.on('stats', function (stats) {
+                                _totalP2PDownloaded = stats.totalP2PDownloaded;
+                                _totalP2PUploaded = stats.totalP2PUploaded;
+                                updateStats();
+                            }).on('peerId', function (peerId) {
+                                _peerId = peerId;
+                            }).on('peers', function (peers) {
+                                _peerNum = peers.length;
+                                updateStats();
+                            });
+
+                        }
+                    }
                 },
-            },
-        });
+                danmaku: {
+                    id: 'efbd974184da4819ab0cc068234a50d3', //弹幕id，随意一个唯一的
+                    api: 'https://api.prprpr.me/dplayer/',
+                    // api: 'https://dplayer.moerats.com/',//弹幕api 固定
+                    bottom: '25%',
+                    unlimited: true,
+                },
+                contextmenu: [
+                    {
+                        text: '1509ers.com',
+                        link: 'https://1509ers.com',
+                    },
+                ],
+
+            });
+            var webdata = {
+                set:function(key,val){
+                    window.sessionStorage.setItem(key,val);
+                },
+                get:function(key){
+                    return window.sessionStorage.getItem(key);
+                },
+                del:function(key){
+                    window.sessionStorage.removeItem(key);
+                },
+                clear:function(key){
+                    window.sessionStorage.clear();
+                }
+            };
+            dp.seek(webdata.get('vod'+url));
+            setInterval(function(){
+                webdata.set('vod'+url,dp.video.currentTime);
+            },1000);
+            dp.on('ended',function() {
+                dp.notice("视频播放已结束");
+                if(parent.MacPlayer.PlayLinkNext!=''){
+                    top.location.href = parent.MacPlayer.PlayLinkNext;}
+            });
+        }
+        else{
+            document.getElementById('dplayer').innerHTML='<video src="'+url+'" controls="controls" preload="preload" poster="" width="100%" height="100%" autoplay="autoplay"></video>';
+        }
+        function updateStats() {
+            var text = '正在使用CDN进行P2P加速 | 已加速' + (_totalP2PDownloaded/1024).toFixed(2)
+                + 'MB 连接节点' + _peerNum + '个';
+            document.getElementById('stats').innerText = text ;
+        }
+        // const dp = new DPlayer({
+        //     container: document.getElementById('dplayer'),
+        //     logo: '/static/img/logo.png',
+        //     video: {
+        //         url: url,
+        //         type: 'hls',
+        //     },
+        //     pluginOptions: {
+        //         hls: {
+        //             // hls config
+        //         },
+        //     },
+        // });
     })
 
     function renderVideoName(data) {
