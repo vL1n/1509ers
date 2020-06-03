@@ -5,14 +5,12 @@ namespace app\index\controller;
 
 
 use app\api\controller\v1\Pythondata;
-use app\common\handleSign\handleSign;
 use app\common\jsonResponse\JsonResponse;
 use think\Request;
 
 class Videos extends Base
 {
     use JsonResponse;
-    use handleSign;
 
     public function index(){
         return $this->fetch();
@@ -25,11 +23,9 @@ class Videos extends Base
     public function videoDetail(Request $request){
         $info = $request->param();
         $id =$info['id'];
-        $video = new Pythondata();
-        $request_data =[
+        $data =[
             'id'=>$id
         ];
-        $data = $this->handleData($request_data);
         $video_detail = action('api/v1.Pythondata/getVideoDetailById',$data);
         $this->assign('video_detail',$video_detail);
         return $this->fetch();
@@ -44,23 +40,14 @@ class Videos extends Base
         $id =$info['id'];
         $url = $info['url'];
         $name = $info['name'];
-        $video = new Pythondata();
-        $request_data =[
+        $data =[
             'id'=>$id
         ];
-        $data = $this->handleData($request_data);
         $video_detail = action('api/v1.Pythondata/getVideoDetailById',$data);
         $this->assign('video_detail',$video_detail);
         $this->assign('url',$url);
         $this->assign('name',$name);
         return $this->fetch();
-    }
-
-    public function getVideoList(Request $request){
-        $info = $request->param();
-        $data = $this->handleData($info);
-        $videoList = action('api/v1.Pythondata/getVideoListByName',$data);
-        return $videoList;
     }
 
 }

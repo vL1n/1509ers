@@ -27,8 +27,11 @@ class InAppCheck
         $is_wp = preg_match("/windows phone/i",$user_agent);
         $is_postman = preg_match("/postman/i",$user_agent);
 
+        $is_mobile_android = preg_match("/X-Android/i",$user_agent);
+        $is_mobile_ios = preg_match("/X-iOS/i",$user_agent);
 
-        if($is_android || $is_iphone || $is_mobile || $is_phone || $is_ipad || $is_ipod || $is_wp){
+
+        if($is_mobile_ios || $is_mobile_android){
             $request->InApp = 'mobile';
         }else{
             $request->InApp = 'web';

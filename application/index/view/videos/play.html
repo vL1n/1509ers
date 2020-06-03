@@ -112,14 +112,11 @@
         renderIndex(parsed_data2)
         var isWap = false;
         if(!isWap){
-            if(url.indexOf(".m3u8") > 0){
-                var _peerId = '', _peerNum = 0, _totalP2PDownloaded = 0, _totalP2PUploaded = 0;
-                var type = 'customHls';
+            var _peerId = '', _peerNum = 0, _totalP2PDownloaded = 0, _totalP2PUploaded = 0;
+            var type = 'customHls';
+            if(navigator.userAgent.match(/iPad|iPhone|iPod|Baidu|UCBrowser/i)) {
+                type = 'normal';
             }
-            else {
-                var type = 'normal'; //MP4格式P2P兼容性不好，不调用P2P。
-            }
-            type = "customHls";
             var dp = new DPlayer({
                 container: document.getElementById('dplayer'),
                 autoplay: false,//自动播放
@@ -200,23 +197,10 @@
             document.getElementById('dplayer').innerHTML='<video src="'+url+'" controls="controls" preload="preload" poster="" width="100%" height="100%" autoplay="autoplay"></video>';
         }
         function updateStats() {
-            var text = '正在使用CDN进行P2P加速 | 已加速' + (_totalP2PDownloaded/1024).toFixed(2)
-                + 'MB 连接节点' + _peerNum + '个';
-            document.getElementById('stats').innerText = text ;
+            var text = 'P2P正在为您加速 已加速' + (_totalP2PDownloaded/1024).toFixed(2)
+                + 'MB 已分享' + (_totalP2PUploaded/1024).toFixed(2) + 'MB' + ' 连接节点' + _peerNum + '个';
+            document.getElementById('stats').innerText = text
         }
-        // const dp = new DPlayer({
-        //     container: document.getElementById('dplayer'),
-        //     logo: '/static/img/logo.png',
-        //     video: {
-        //         url: url,
-        //         type: 'hls',
-        //     },
-        //     pluginOptions: {
-        //         hls: {
-        //             // hls config
-        //         },
-        //     },
-        // });
     })
 
     function renderVideoName(data) {

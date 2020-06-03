@@ -143,4 +143,26 @@ return [
     // 异常处理handle类 留空使用 \think\exception\Handle
     'exception_handle'       => '',
 
+    // +----------------------------------------------------------------------
+    // | 自定义设置
+    // +----------------------------------------------------------------------
+
+    // 签名密钥
+    'secret'                => '%%1509ers##@@',
+
+    // 阿里云短信验证码相关
+    'Alisms'                =>  [
+                                    'AccessKeyId'=>'LTAIGvVye5jGtx2E',
+                                    'AccessKeySecret'=>'TEXBq4LkGAEl9B8ALuG1mhkLqi330e',
+                                    'SignName'=>'1509ers',
+                                    'TemplateCode'=>'SMS_190790157',
+                                    'regionId'=>'cn-hangzhou'
+                                ],
+
+    // 验证超时时间设置
+    // 客户端sign超时
+    'Time_out'=> 60,
+    // web端sign超时
+    'web_time_out'=>30,
+
 ];

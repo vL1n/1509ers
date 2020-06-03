@@ -43,7 +43,7 @@ class SignCheck
 
             // 检查时间存不存在
             if($param_time == ''){
-                return $this->jsonInstanceData(apiErrCode::REQUEST_TIME_OUT[0],apiErrCode::REQUEST_TIME_OUT[1],'4');
+                return $this->jsonInstanceData(apiErrCode::REQUEST_TIME_OUT[0],apiErrCode::REQUEST_TIME_OUT[1]);
             }
 
             // 参数拼接
@@ -53,11 +53,11 @@ class SignCheck
                 return $this->jsonInstanceData(apiErrCode::ILLEGAL_SIGN[0],apiErrCode::ILLEGAL_SIGN[1]);
             }
 
-            $time_out = Config::get('Time_out');
+            $web_time_out = Config::get('web_time_out');
 
             // 鉴定时间是否超时
-            if($time - $param_time > '5'){
-                return $this->jsonInstanceData(apiErrCode::REQUEST_TIME_OUT[0],apiErrCode::REQUEST_TIME_OUT[1],'3');
+            if($time - $param_time > $web_time_out){
+                return $this->jsonInstanceData(apiErrCode::REQUEST_TIME_OUT[0],apiErrCode::REQUEST_TIME_OUT[1]);
             }
         }
 
@@ -75,13 +75,18 @@ class SignCheck
 
             // 判断时间是否存在
             if($param['time'] == ''){
-                return $this->jsonInstanceData(apiErrCode::REQUEST_TIME_OUT[0],apiErrCode::REQUEST_TIME_OUT[1],'2');
+                return $this->jsonInstanceData(apiErrCode::REQUEST_TIME_OUT[0],apiErrCode::REQUEST_TIME_OUT[1]);
             }
 
             // 进行参数拼接
             unset($param['sign']);
             ksort($param);
             $req = http_build_query($param);
+            $req = str_replace('InApp=mobile&','',$req);
+
+            // 解决url_encode 后邮箱中的@转义为%40
+            $req = str_replace('%40','@',$req);
+
             $sign_made_by_serve = md5($req.$secretKey);
             if($sign != $sign_made_by_serve){
                 return $this->jsonInstanceData(apiErrCode::ILLEGAL_SIGN[0],apiErrCode::ILLEGAL_SIGN[1]);
@@ -91,8 +96,9 @@ class SignCheck
 
             $time_out = Config::get('Time_out');
 
+
             if($time - $param['time'] > $time_out){
-                return $this->jsonInstanceData(apiErrCode::REQUEST_TIME_OUT[0],apiErrCode::REQUEST_TIME_OUT[1],'1');
+                return $this->jsonInstanceData(apiErrCode::REQUEST_TIME_OUT[0],apiErrCode::REQUEST_TIME_OUT[1]);
             }
         }
         else{
