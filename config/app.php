@@ -164,5 +164,6 @@ return [
     'Time_out'=> 60,
     // web端sign超时
     'web_time_out'=>30,
+    'test'
 
 ];
