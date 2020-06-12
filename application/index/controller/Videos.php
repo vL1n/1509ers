@@ -47,6 +47,7 @@ class Videos extends Base
         $this->assign('video_detail',$video_detail);
         $this->assign('url',$url);
         $this->assign('name',$name);
+        $this->assign('movieId',$id);
         return $this->fetch();
     }
 

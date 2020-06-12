@@ -57,6 +57,7 @@
                     <section class="col-sm-12 col-lg-6 offset-lg-3 connectedSortable">
                         <input type="text" value="{$video_detail}" hidden id="video_detail">
                         <input type="text" value="{$url}" hidden id="video_url">
+                        <input type="text" value="{$movieId}" hidden id="MID">
 
                         <div class="card card-primary card-outline">
                             <div class="card-header">
@@ -106,6 +107,7 @@
     $(function () {
         var data = document.getElementById('video_detail').value ;
         var url = document.getElementById('video_url').value ;
+        var mid = document.getElementById('MID').value ;
         var parsed_data = JSON.parse(data)
         var parsed_data2 = JSON.parse(parsed_data.data)
         renderVideoName(parsed_data2)
@@ -155,7 +157,7 @@
                     }
                 },
                 danmaku: {
-                    id: 'efbd974184da4819ab0cc068234a50d3', //弹幕id，随意一个唯一的
+                    id: '1509ers.com'+mid, //弹幕id，随意一个唯一的
                     api: 'https://api.prprpr.me/dplayer/',
                     // api: 'https://dplayer.moerats.com/',//弹幕api 固定
                     bottom: '25%',
