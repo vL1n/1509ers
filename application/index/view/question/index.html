@@ -109,7 +109,7 @@
                 //创建视图完毕，开始请求
                 $.ajax({
                     type:'GET',
-                    url:"{:url('/index/Question/searchQuestion')}",
+                    url:"{:url('/api/v1.Pythondata/searchQuestion')}",
                     data: $(".requestForm").serialize(),
                     dataType: "JSON",
                     success: function(data){

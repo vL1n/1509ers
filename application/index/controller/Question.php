@@ -9,7 +9,6 @@ use think\Request;
 
 class Question extends Base
 {
-    use handleSign;
     public function index(){
         return $this->fetch();
     }
