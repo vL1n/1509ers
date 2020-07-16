@@ -40,6 +40,13 @@ class Init extends Controller
         if($userInfo_decode->code != 0){
             return $this->jsonData($userInfo_decode->code,$userInfo_decode->msg);
         }
+
+        // 如果还没验证手机号或者更改密码，那么返回
+        if (($userInfo_decode->data)->phone_checked == '0' || ($userInfo_decode->data)->pwd_changed == '0'){
+            return $this->jsonData(apiErrCode::PHONE_CHECK_FAILED[0],apiErrCode::PHONE_CHECK_FAILED[1]);
+        }
+
+
         // 密码错误
         if(md5($info['password']) != ($userInfo_decode->data)->password){
             return $this->jsonData(apiErrCode::ERR_PASSWORD[0],apiErrCode::ERR_PASSWORD[1]);
@@ -71,6 +78,11 @@ class Init extends Controller
         ]);
     }
 
+    /**
+     * 注册api，目前已经不需要注册
+     * @param Request $request
+     * @return false|string
+     */
     public function userRegister(Request $request){
 
         $info = $request->param();
@@ -105,7 +117,10 @@ class Init extends Controller
 
     }
 
-    public function userRegister2(Request $request){
+    public function phoneCheck(Request $request){
+
+        $info = $request->param();
+        $phone_number = $info['phone'];
 
     }
 

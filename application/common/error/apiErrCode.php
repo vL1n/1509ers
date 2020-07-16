@@ -23,6 +23,7 @@ class apiErrCode
     const USR_ID_NOEXIST    =   [1006, '用户id不存在'];
     const SCHOOL_ID_EXIST   =   [1007, '学号已存在,请勿重复注册'];
     const ERR_LOGIN_TYPE    =   [1008, '错误的登陆方式'];
+    const PHONE_CHECK_FAILED =  [1009, '未绑定手机号或手机号未验证'];
 
     /**
      * Token检验异常
