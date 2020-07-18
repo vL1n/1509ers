@@ -8,6 +8,7 @@ use app\api\validate\UserInfo;
 use app\common\auth\jwt;
 use app\common\error\apiErrCode;
 use app\common\jsonResponse\JsonResponse;
+use app\common\jsonResponse\RegCheck;
 use think\Cache;
 use think\cache\driver\Redis;
 use think\Controller;
@@ -28,14 +29,17 @@ class Init extends Controller
         // 获取请求参数
         $info = $request->param();
         $user = new \app\common\model\User();
+
+        // 初始化请求方式
         $type = $info['loginType'];
         if($type != 'phone' && $type != 'email'){
-            return $this->jsonData(apiErrCode::ERR_LOGIN_TYPE[0],apiErrCode::ERR_LOGIN_TYPE[1]);
+            return $this->jsonApiError(apiErrCode::ERR_LOGIN_TYPE);
         }
 
-        //从模型中查询信息并解码
+        // 从模型中查询信息并解码
         $userInfo = $user->getUserInfoByField($type,$info['param']);
-        $userInfo_decode = json_decode($userInfo);
+        $userInfo_decode = json_decode($userInfo,true);
+
         // 模型返回异常
         if($userInfo_decode->code != 0){
             return $this->jsonData($userInfo_decode->code,$userInfo_decode->msg);
@@ -43,15 +47,19 @@ class Init extends Controller
 
         // 如果还没验证手机号或者更改密码，那么返回
         if (($userInfo_decode->data)->phone_checked == '0' || ($userInfo_decode->data)->pwd_changed == '0'){
-            return $this->jsonData(apiErrCode::PHONE_CHECK_FAILED[0],apiErrCode::PHONE_CHECK_FAILED[1]);
+            return $this->jsonApiError(apiErrCode::PHONE_CHECK_FAILED);
         }
 
 
         // 密码错误
         if(md5($info['password']) != ($userInfo_decode->data)->password){
-            return $this->jsonData(apiErrCode::ERR_PASSWORD[0],apiErrCode::ERR_PASSWORD[1]);
+            return $this->jsonApiError(apiErrCode::ERR_PASSWORD);
         }
 
+
+        /**
+         * 验证成功之后的操作
+         */
         //登陆通过，写入数据库，维护最近登陆时间
         $uid = ($userInfo_decode->data)->id;
         $user->where('id',$uid)->setInc('login_count');
@@ -73,7 +81,7 @@ class Init extends Controller
             Session::set('web_token',$token);
         }
 
-        return $this->jsonData(apiErrCode::SUCCESS[0],apiErrCode::SUCCESS[1],[
+        return $this->jsonSuccess([
             'token' => $token
         ]);
     }
@@ -99,14 +107,14 @@ class Init extends Controller
         // 验证传输数据
         $validate = new UserInfo();
         if (!$validate->check($data)) {
-            return $this->jsonData(apiErrCode::ERR_SYSTEM[0],$validate->getError());
+            return $this->jsonApiError(apiErrCode::ERR_SYSTEM,$validate->getError());
         }
 
         // 查询学号存在情况
         $res = $user->searchUserInfoByField('school_id',$info['school_id']);
             // 学号已存在
         if(json_decode($res,true)['code'] != 0){
-            return $this->jsonData(apiErrCode::ERR_COMMON[0],json_decode($res,true)['msg']);
+            return $this->jsonApiError(apiErrCode::ERR_COMMON,json_decode($res,true)['msg']);
         }
 
         // 写入数据库,新建记录
@@ -120,7 +128,19 @@ class Init extends Controller
     public function phoneCheck(Request $request){
 
         $info = $request->param();
-        $phone_number = $info['phone'];
+
+
+    }
+
+    public function userLogin1(Request $request){
+
+        // 处理请求数据
+        $info = $request->param();
+        $user = new \app\common\model\User();
+
+        // 判断登陆方式
+        $account = $info['account'];
+
 
     }
 

@@ -52,4 +52,15 @@ trait JsonResponse
         ];
         return json($content);
     }
+
+    /**
+     * api 返回错误码
+     * @param $code
+     * @param $data
+     * @return false|string
+     */
+    public function jsonApiError($apiErrCode= [], $data=[]){
+
+        return $this->jsonData($apiErrCode[0],$apiErrCode[1],$data);
+    }
 }
