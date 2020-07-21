@@ -43,4 +43,35 @@ trait regCheck
         }
         return false;
     }
+
+    /**
+     * @param $school_id
+     * @return bool
+     */
+    function is_school_id($school_id){
+        if(preg_match("/^[1-9][0-9]*$/" ,$school_id)){
+            if($school_id>0 && $school_id<99){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * @param $param
+     * @return string
+     */
+    function check_type($param){
+        if ($this->is_email($param)){
+            return 'email';
+        }
+        elseif ($this->is_mobile_phone($param)){
+            return 'phone';
+        }
+        elseif ($this->is_school_id($param)){
+            return 'school_id';
+        }
+        return '';
+    }
 }

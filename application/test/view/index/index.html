@@ -1,41 +1,184 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <title>1509</title>
-    <link rel="shortcut icon" href="/static/img/bz.ico">
-    <link rel="apple-touch-icon-precomposed" href="/static/img/bz.png">
-</head>
-<body>
-<h1 style="font-size: 300px;margin-left: 100px;margin-top: 0px;">:)</h1>
-<h1 style="margin-left: 50px;font-size: 100px;">Hello, 1509er ~~</h1>
-<h1 style="margin-left: 50px;margin-top: -80px;" id="pastTime">Working In Progress!</h1>
+﻿{include file="/common/head" /}
+	<body class="slideshow-zoom-background">
 
-<h5 style="margin-top: 800px;margin-left: 50px;">copyright @ 1509 WorkTeam</h5>
-</body>
+		<div id="preloader" class="preloader">
+			<div class="loader-status">
+				<div class="spinner"></div>
+			</div>
+		</div>
+
+		<!-- Global overlay -->
+		<div class="global-overlay">
+			<div class="overlay-inner bg-dark opacity-80"></div>
+		</div>
+
+		<!-- Site header -->
+		{include file="/common/navbar" /}
+
+		<div class="site-content">
+			<div class="site-content-inner">
+
+				<div class="site-part" id="home">
+					<section class="fullscreen d-flex">
+						<div class="container align-self-center text-white text-center">
+							<div class="row">
+								<div class="col-12 col-lg-10 mx-lg-auto">
+									<div class="countdown mx-auto mb-4 animated" data-animation="fadeInUp" data-countdown="2018/6/8 17:00:00" date-start="2018/6/8 17:00:00"></div>
+									<h3 class="mb-5 animated" data-animation="fadeInUp" data-animation-delay="200">
+										毕业已逝
+									</h3>
+									<!-- <a href="#about" class="btn btn-white scrollto animated" data-animation="fadeInUp" data-animation-delay="400">Learn more</a>
+									<a href="#subscribe" class="btn btn-primary scrollto animated" data-animation="fadeInUp" data-animation-delay="600">Subscribe</a> -->
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+
+				<div class="site-part" id="videos">
+					<section class="fullscreen d-flex">
+						<div class="container align-self-center text-white">
+							<div class="row mb-5 text-center">
+								<div class="col-12 col-lg-9 mx-lg-auto">
+									<h2 class="h1 mb-4 animated" data-animation="fadeInUp">Subscribe To Our Newsletter</h2>
+									<div class="divider animated" data-animation="fadeInUp" data-animation-delay="200"><span></span></div>
+									<p class="animated" data-animation="fadeInUp" data-animation-delay="400">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12 col-lg-6 mx-lg-auto">
+									<div class="subscribe-form animated" data-animation="fadeInUp" data-animation-delay="600">
+										<form class="mb-0" id="sf" name="sf" action="include/subscribe.php" method="post" autocomplete="off">
+											<div class="form-row">
+
+												<div class="form-process"></div>
+
+												<div class="col-12 col-md-9">
+													<div class="form-group text-white">
+														<input type="email" id="sf-email1" name="sf-email" placeholder="Enter Your Email Address" class="form-control required">
+													</div>
+												</div>
+
+												<div class="col-12 d-none">
+													<input type="text" id="sf-botcheck1" name="sf-botcheck" value="" class="form-control" />
+												</div>
+
+												<div class="col-12 col-md-3">
+													<button class="btn btn-primary btn-block" type="submit" id="sf-submit1" name="sf-submit">Notify Me</button>
+												</div>
+
+											</div>
+										</form>
+										<div class="subscribe-form-result pt-2"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+
+				<div class="site-part" id="airticket">
+					<section class="fullscreen d-flex">
+						<div class="container align-self-center text-white">
+							<div class="row mb-5 text-center">
+								<div class="col-12 col-lg-9 mx-lg-auto">
+									<h2 class="h1 mb-4 animated" data-animation="fadeInUp">Subscribe To Our Newsletter</h2>
+									<div class="divider animated" data-animation="fadeInUp" data-animation-delay="200"><span></span></div>
+									<p class="animated" data-animation="fadeInUp" data-animation-delay="400">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12 col-lg-6 mx-lg-auto">
+									<div class="subscribe-form animated" data-animation="fadeInUp" data-animation-delay="600">
+										<form class="mb-0" id="sf" name="sf" action="include/subscribe.php" method="post" autocomplete="off">
+											<div class="form-row">
+
+												<div class="form-process"></div>
+
+												<div class="col-12 col-md-9">
+													<div class="form-group text-white">
+														<input type="email" id="sf-email2" name="sf-email" placeholder="Enter Your Email Address" class="form-control required">
+													</div>
+												</div>
+
+												<div class="col-12 d-none">
+													<input type="text" id="sf-botcheck2" name="sf-botcheck" value="" class="form-control" />
+												</div>
+
+												<div class="col-12 col-md-3">
+													<button class="btn btn-primary btn-block" type="submit" id="sf-submit2" name="sf-submit">Notify Me</button>
+												</div>
+
+											</div>
+										</form>
+										<div class="subscribe-form-result pt-2"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+
+				<div class="site-part" id="BZBA">
+					<section class="fullscreen d-flex">
+						<div class="container align-self-center text-white">
+							<div class="row mb-5 text-center">
+								<div class="col-12 col-lg-9 mx-lg-auto">
+									<h2 class="h1 mb-4 animated" data-animation="fadeInUp">Services</h2>
+									<div class="divider animated" data-animation="fadeInUp" data-animation-delay="200"><span></span></div>
+									<p class="animated" data-animation="fadeInUp" data-animation-delay="400">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+								</div>
+							</div>
+							<div class="row">
+
+								<div class="col-12 col-lg-4 mb-5 mb-lg-0">
+									<div class="feature-block animated" data-animation="fadeInUp" data-animation-delay="600">
+										<div class="feature-icon text-primary mb-3">
+											<div>
+												<i class="ti-timer"></i>
+											</div>
+										</div>
+										<h3 class="h4 mb-2">Launch Quickly</h3>
+										<p>Quisque ultrices non velit sit amet consectetur. Cras turpis dolor, facilisis a nibh non, ullamcorper facilisis mauris. Nulla rutrum arcu sed ligula malesuada, quis condimentum eros sollicitudin.</p>
+									</div>
+								</div>
+
+								<div class="col-12 col-lg-4 mb-5 mb-lg-0">
+									<div class="feature-block animated" data-animation="fadeInUp" data-animation-delay="800">
+										<div class="feature-icon text-primary mb-3">
+											<div>
+												<i class="ti-brush-alt"></i>
+											</div>
+										</div>
+										<h3 class="h4 mb-2">Stylish Design</h3>
+										<p>Quisque ultrices non velit sit amet consectetur. Cras turpis dolor, facilisis a nibh non, ullamcorper facilisis mauris. Nulla rutrum arcu sed ligula malesuada, quis condimentum eros sollicitudin.</p>
+									</div>
+								</div>
+
+								<div class="col-12 col-lg-4">
+									<div class="feature-block animated" data-animation="fadeInUp" data-animation-delay="1000">
+										<div class="feature-icon text-primary mb-3">
+											<div>
+												<i class="ti-book"></i>
+											</div>
+										</div>
+										<h3 class="h4 mb-2">Well Documented</h3>
+										<p>Quisque ultrices non velit sit amet consectetur. Cras turpis dolor, facilisis a nibh non, ullamcorper facilisis mauris. Nulla rutrum arcu sed ligula malesuada, quis condimentum eros sollicitudin.</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</section>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Site footer -->
+		{include file="/common/footer" /}
+
+		{include file="/common/scripts" /}
+
+	</body>
 </html>
-<script type="text/javascript">
-    setInterval(function() {
-        let date1 = '2018/06/08 17:00:00';  //开始时间
-        let date2 = new Date();    //结束时间
-        let date3 = date2.getTime() - new Date(date1).getTime();   //时间差的毫秒数
-
-        //计算出相差天数
-        let days = Math.floor(date3 / (24 * 3600 * 1000))
-
-        //计算出小时数
-
-        let leave1 = date3 % (24 * 3600 * 1000)    //计算天数后剩余的毫秒数
-        let hours = Math.floor(leave1 / (3600 * 1000))
-        //计算相差分钟数
-        let leave2 = leave1 % (3600 * 1000)        //计算小时数后剩余的毫秒数
-        let minutes = Math.floor(leave2 / (60 * 1000))
-        //计算相差秒数
-        let leave3 = leave2 % (60 * 1000)      //计算分钟数后剩余的毫秒数
-        let seconds = Math.round(leave3 / 1000)
-	let days2 = days - 365  //玉富毕业天数计算
-        let pastTime = " 距离我们毕业已经过去了 " + days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒 ";
-        document.getElementById("pastTime").innerHTML = pastTime;
-    },1000)
-</script>
-

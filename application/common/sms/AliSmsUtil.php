@@ -40,7 +40,7 @@ class AliSmsUtil
                     ],
                 ])
                 ->request();
-            print_r($result->toArray());
+//            print_r($result->toArray());
         } catch (ClientException $e) {
             echo $e->getErrorMessage() . PHP_EOL;
         } catch (ServerException $e) {

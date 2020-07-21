@@ -24,6 +24,12 @@ class apiErrCode
     const SCHOOL_ID_EXIST   =   [1007, '学号已存在,请勿重复注册'];
     const ERR_LOGIN_TYPE    =   [1008, '错误的登陆方式'];
     const PHONE_CHECK_FAILED =  [1009, '未绑定手机号或手机号未验证'];
+    const PWD_NOT_CHANGED   =   [1010, '未更改初始密码'];
+    const REQUEST_FREQUENTLY =  [1011, '请求过于频繁，请稍后再试'];
+    const SMS_5_ALLOWED_A_DAY=  [1012, '一个用户每天最多只被允许请求5次短信服务'];
+    const SMS_TIME_OUT      =   [1013, '验证码过期'];
+    const SMS_OR_PHONE_ERROR=   [1014, '验证码或者手机号错误'];
+    const SMS_USED          =   [1015, '验证码已使用'];
 
     /**
      * Token检验异常
