@@ -1,10 +1,70 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: NickBai
+ * Email: 876337011@qq.com
+ * Date: 2019/2/17
+ * Time: 11:33 AM
+ */
 namespace app\admin\controller;
 
-class Index
+use app\admin\model\Admin;
+use think\App;
+use tool\Auth;
+
+class Index extends Base
 {
     public function index()
     {
-        return '<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} a{color:#2E5CD5;cursor: pointer;text-decoration: none} a:hover{text-decoration:underline; } body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px;} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.6em; font-size: 42px }</style><div style="padding: 24px 48px;"> <h1>:) </h1><p> ThinkPHP V5.1<br/><span style="font-size:30px">12载初心不改（2006-2018） - 你值得信赖的PHP框架</span></p></div><script type="text/javascript" src="https://tajs.qq.com/stats?sId=64890268" charset="UTF-8"></script><script type="text/javascript" src="https://e.topthink.com/Public/static/client.js"></script><think id="eab4b9f840753f8e7"></think>';
+        $authModel = new Auth();
+        $menu = $authModel->getAuthMenu(session('admin_role_id'));
+
+        $this->assign([
+            'menu' => $menu
+        ]);
+
+        return $this->fetch();
+    }
+
+    public function home()
+    {
+        $this->assign([
+            'tp_version' => App::VERSION
+        ]);
+
+        return $this->fetch();
+    }
+
+    // 修改密码
+    public function editPwd()
+    {
+        if (request()->isPost()) {
+
+            $param = input('post.');
+
+            if ($param['new_password'] != $param['rep_password']) {
+                return json(['code' => -1, 'data' => '', 'msg' => '两次密码输入不一致']);
+            }
+
+            // 检测旧密码
+            $admin = new Admin();
+            $adminInfo = $admin->getAdminInfo(session('admin_user_id'));
+
+            if(0 != $adminInfo['code'] || empty($adminInfo['data'])){
+                return json(['code' => -2, 'data' => '', 'msg' => '管理员不存在']);
+            }
+
+            if(!checkPassword($param['password'], $adminInfo['data']['admin_password'])){
+                return json(['code' => -3, 'data' => '', 'msg' => '旧密码错误']);
+            }
+
+            $admin->updateAdminInfoById(session('admin_user_id'), [
+                'admin_password' => makePassword($param['new_password'])
+            ]);
+
+            return json(['code' => 0, 'data' => '', 'msg' => '修改密码成功']);
+        }
+
+        return $this->fetch('pwd');
     }
 }

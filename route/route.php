@@ -13,6 +13,7 @@ Route::domain('test','test');
 Route::domain('mobile','mobile');
 Route::domain('admin','admin');
 
+Route::get('/admin/log/system', 'Qsnh\Think\Log\Controllers\LogViewerController@index');
 return [
 
 ];

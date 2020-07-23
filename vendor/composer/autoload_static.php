@@ -18,12 +18,15 @@ class ComposerStaticInit3600ebffb8352960f9a007b2d2149b43
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         '66453932bc1be9fb2f910a27947d11b6' => __DIR__ . '/..' . '/alibabacloud/client/src/Functions.php',
+        'de5a05d860a3458e33da1cc737ac32ea' => __DIR__ . '/..' . '/qsnh/think-log-viewer/autoload.php',
+        '1cfd2761b63b0a29ed23657ea394cb2d' => __DIR__ . '/..' . '/topthink/think-captcha/src/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         't' => 
         array (
             'think\\composer\\' => 15,
+            'think\\captcha\\' => 14,
         ),
         'c' => 
         array (
@@ -43,6 +46,10 @@ class ComposerStaticInit3600ebffb8352960f9a007b2d2149b43
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Stringy\\' => 8,
+        ),
+        'Q' => 
+        array (
+            'Qsnh\\Think\\Log\\' => 15,
         ),
         'P' => 
         array (
@@ -75,6 +82,10 @@ class ComposerStaticInit3600ebffb8352960f9a007b2d2149b43
         array (
             0 => __DIR__ . '/..' . '/topthink/think-installer/src',
         ),
+        'think\\captcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/topthink/think-captcha/src',
+        ),
         'clagiordano\\weblibs\\configmanager\\' => 
         array (
             0 => __DIR__ . '/..' . '/clagiordano/weblibs-configmanager/src',
@@ -102,6 +113,10 @@ class ComposerStaticInit3600ebffb8352960f9a007b2d2149b43
         'Stringy\\' => 
         array (
             0 => __DIR__ . '/..' . '/danielstjules/stringy/src',
+        ),
+        'Qsnh\\Think\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/qsnh/think-log-viewer/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -141,11 +156,16 @@ class ComposerStaticInit3600ebffb8352960f9a007b2d2149b43
         ),
     );
 
+    public static $classMap = array (
+        'Ip2Region' => __DIR__ . '/..' . '/zoujingli/ip2region/Ip2Region.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit3600ebffb8352960f9a007b2d2149b43::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit3600ebffb8352960f9a007b2d2149b43::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit3600ebffb8352960f9a007b2d2149b43::$classMap;
 
         }, null, ClassLoader::class);
     }

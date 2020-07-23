@@ -31,7 +31,7 @@ class Index extends Controller
         $data = [
             'userInfo'=>$userInfo_decode['data'],
         ];
-        return $this->jsonData(apiErrCode::SUCCESS[0],apiErrCode::SUCCESS[1],$data);
+        return $this->jsonSuccess($data);
     }
 
 

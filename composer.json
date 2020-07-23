@@ -20,7 +20,10 @@
         "topthink/framework": "5.1.*",
         "lcobucci/jwt": "^3.3",
         "alibabacloud/sdk": "^1.8",
-        "workerman/workerman": "^4.0"
+        "workerman/workerman": "^4.0",
+        "topthink/think-captcha": "2.0.*",
+        "zoujingli/ip2region": "^1.0",
+        "qsnh/think-log-viewer": "^1.0"
     },
     "autoload": {
         "psr-4": {

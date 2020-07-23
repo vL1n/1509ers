@@ -46,12 +46,6 @@ class apiErrCode
     const ILLEGAL_SIGN      =   [1019, '非法签名'];
 
     /**
-     * 注册异常
-     */
-    const USR_EXISTED       =   [1020, '用户名已存在'];
-    const ERR_PHONE         =   [1021, '手机号格式不正确'];
-
-    /**
      * 上传异常
      *
      */

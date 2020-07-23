@@ -26,7 +26,7 @@ class Utils extends Controller
      * @return false|string
      * @throws \think\Exception
      */
-    public function userLogin1(Request $request){
+    public function userLogin(Request $request){
 
         // 处理请求数据
         $info = $request->param();
@@ -185,6 +185,9 @@ class Utils extends Controller
         // 根据手机号从数据库中获取该手机最新的一条验证码信息,find()函数只返回一条信息，time desc 为根据时间倒序寻找，也就是最新一条
         $sms_info = $sms->where('phone_number',$phone)->order('time desc')->find();
 
+        if(!$sms_info){
+            return $this->jsonApiError(apiErrCode::SMS_OR_PHONE_ERROR);
+        }
         // 1.判断验证码是否正确
         if ($sms_info['code'] != $code){
             return $this->jsonApiError(apiErrCode::SMS_OR_PHONE_ERROR);

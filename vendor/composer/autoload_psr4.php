@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'think\\composer\\' => array($vendorDir . '/topthink/think-installer/src'),
+    'think\\captcha\\' => array($vendorDir . '/topthink/think-captcha/src'),
     'clagiordano\\weblibs\\configmanager\\' => array($vendorDir . '/clagiordano/weblibs-configmanager/src'),
     'app\\' => array($baseDir . '/application'),
     'Workerman\\' => array($vendorDir . '/workerman/workerman'),
@@ -14,6 +15,7 @@ return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Intl\\Idn\\' => array($vendorDir . '/symfony/polyfill-intl-idn'),
     'Stringy\\' => array($vendorDir . '/danielstjules/stringy/src'),
+    'Qsnh\\Think\\Log\\' => array($vendorDir . '/qsnh/think-log-viewer/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Lcobucci\\JWT\\' => array($vendorDir . '/lcobucci/jwt/src'),
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
