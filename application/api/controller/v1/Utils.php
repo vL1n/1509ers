@@ -7,6 +7,7 @@ namespace app\api\controller\v1;
 use app\common\auth\jwt;
 use app\common\error\apiErrCode;
 use app\common\jsonResponse\JsonResponse;
+use app\common\model\LoginLog;
 use app\common\model\Sms;
 use app\common\model\User;
 use app\common\regCheck\RegCheck;
@@ -31,6 +32,7 @@ class Utils extends Controller
         // 处理请求数据
         $info = $request->param();
         $user = new User();
+        $log = new LoginLog();
 
         // 判断登陆方式(学号|邮箱|手机号)
         $account = $info['account'];
@@ -52,6 +54,7 @@ class Utils extends Controller
 
         // 密码错误
         if(md5($info['password']) != $userInfo_decode['data']['password']){
+            $log->writeLoginLog($userInfo_decode['real_name'],2);
             return $this->jsonApiError(apiErrCode::ERR_PASSWORD);
         }
 
@@ -89,6 +92,9 @@ class Utils extends Controller
             $redis->setex($uid.'_'.'web_token',604800,$token);
             Session::set('web_token',$token);
         }
+        // 写入login_log
+
+        $log->writeLoginLog($userInfo_decode['real_name'],1);
 
         return $this->jsonSuccess([
             'token' => $token

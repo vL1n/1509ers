@@ -116,7 +116,11 @@ class Manager extends Base
                 return ['code' => -1, 'data' => '', 'msg' => $validate->getError()];
             }
 
-            if(isset($param['admin_password'])) {
+            if(empty($param['admin_password'])) {
+                unset($param['admin_password']);
+//                $param['admin_password'] = makePassword($param['admin_password']);
+            }
+            else{
                 $param['admin_password'] = makePassword($param['admin_password']);
             }
 

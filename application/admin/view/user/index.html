@@ -143,38 +143,58 @@
                 [{
                     field: "id",
                     title: "id",
+                    width: 50,
+                    align: "center",
                     sort: true
                 },{
                     field: "school_id",
                     title: "学号",
+                    width: 80,
+                    align: "center",
                     sort: true
                 }, {
                     field: "username",
                     title: "用户名",
+                    align: "center",
+                    width: 100,
                 },{
                     field: "real_name",
-                    title: "真实姓名"
+                    title: "真实姓名",
+                    align: "center",
+                    width: 90,
                 }, {
                     field: "college",
-                    title: "在读学校"
+                    title: "在读学校",
+                    align: "center",
+                    width: 120,
                 },{
                     field: "sex",
                     title: "性别",
+                    align: "center",
+                    width: 60,
                     templet: "#sexTpl",
                 },{
                     field: "phone",
                     title: "电话",
+                    align: "center",
+                    width: 120,
                 }, {
                     field: "email",
                     title: "邮箱",
+                    align: "center",
+                    width: 200,
                     // templet: '#statusTpl'
                 }, {
                     field: "login_count",
                     title: "登录次数",
+                    align: "center",
+                    width: 101,
                     sort: true
                 }, {
                     field: "last_login",
                     title: "上次登录时间",
+                    align: "center",
+                    width: 130,
                     templet: function (d) { if (!d.last_login){return '无记录'}; return util.toDateString(d.last_login * 1000, "yyyy-MM-dd HH:mm:ss")},
                     sort: true
                 },{
@@ -191,7 +211,9 @@
                     templet: "#emailCheckTpl"
                 },{
                     field: "last_ip",
-                    title: "最后一次登录的ip"
+                    title: "最后一次登录的ip",
+                    align: "center",
+                    width: 140,
                 },{
                     field: "is_admin",
                     title: "是否为管理员",
@@ -205,7 +227,7 @@
                     title: "操作",
                     align: "center",
                     width: 150,
-                    fixed: "right",
+                    // fixed: "right",
                     toolbar: "#table-seller-admin"
                 }]
             ],70);
