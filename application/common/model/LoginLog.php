@@ -6,7 +6,7 @@
  * Date: 2019/9/29
  * Time: 10:39 PM
  */
-namespace app\admin\model;
+namespace app\common\model;
 
 use think\facade\Log;
 use think\Model;

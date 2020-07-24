@@ -27,7 +27,7 @@ class User extends Model
         catch (Exception $e){
             return $this->jsonData(apiErrCode::ERR_UNKNOWN[0],$e->getMessage());
         }
-        return $this->jsonData(apiErrCode::SUCCESS[0],apiErrCode::SUCCESS[1],$res);
+        return $this->jsonSuccess($res);
     }
 
     /**
@@ -45,7 +45,7 @@ class User extends Model
         catch (Exception $e){
             return $this->jsonData(apiErrCode::ERR_UNKNOWN[0],$e->getMessage());
         }
-        return $this->jsonData(apiErrCode::SUCCESS[0],apiErrCode::SUCCESS[1],$res);
+        return $this->jsonSuccess($res);
     }
 
     /**
@@ -60,7 +60,7 @@ class User extends Model
         } catch (\Exception $e) {
             return $this->jsonData(apiErrCode::ERR_UNKNOWN[0],$e->getMessage());
         }
-        return $res;
+        return $this->jsonSuccess($res);
     }
 
     /**
@@ -79,7 +79,7 @@ class User extends Model
             return $this->jsonData(apiErrCode::ERR_UNKNOWN[0],$e->getMessage());
         }
 
-        return $this->jsonData(apiErrCode::SUCCESS[0],apiErrCode::SUCCESS[1],$res);
+        return $this->jsonSuccess($res);
     }
 
     /**
@@ -116,6 +116,106 @@ class User extends Model
         catch (Exception $e){
             return $this->jsonData(apiErrCode::ERR_UNKNOWN[0],$e->getMessage());
         }
-        return $this->jsonData(apiErrCode::SUCCESS[0],apiErrCode::SUCCESS[1],$res);
+        return $this->jsonSuccess($res);
     }
+
+    /**
+     * 获取所有用户信息
+     * @return false|string
+     */
+    public function getAllUser(){
+        try {
+            $res = $this->where('id','<>','0')->findOrEmpty()->toArray();
+            if (empty($res)){
+                return $this->jsonApiError(apiErrCode::NO_USER);
+            }
+        }
+        catch (Exception $e){
+            return $this->jsonData(apiErrCode::ERR_UNKNOWN[0],$e->getMessage());
+        }
+        return $this->jsonSuccess($res);
+    }
+
+    public function getUsers($limit, $where)
+    {
+
+        try {
+
+            $res = $this->where($where)->order('id', 'esc')->paginate($limit);
+
+        }catch (\Exception $e) {
+
+            return modelReMsg(-1, '', $e->getMessage());
+        }
+
+        return modelReMsg(0, $res, 'ok');
+    }
+
+    public function addUser($user){
+        try {
+
+            $has = $this->where('username', $user['username'])->findOrEmpty()->toArray();
+            if(!empty($has)) {
+                return modelReMsg(-2, '', '管理员名已经存在');
+            }
+
+            $this->insert($user);
+        }catch (\Exception $e) {
+
+            return modelReMsg(-1, '', $e->getMessage());
+        }
+
+        return modelReMsg(0, '', '添加管理员成功');
+    }
+
+    public function editUser($user)
+    {
+        try {
+
+            $has = $this->where('username', $user['username'])->where('id', '<>', $user['id'])
+                ->findOrEmpty()->toArray();
+            if(!empty($has)) {
+                return modelReMsg(-2, '', '用户已经存在');
+            }
+
+            $this->save($user, ['id' => $user['id']]);
+        }catch (\Exception $e) {
+
+            return modelReMsg(-1, '', $e->getMessage());
+        }
+
+        return modelReMsg(0, '', '编辑用户成功');
+    }
+
+    public function delUser($userId)
+    {
+        try {
+            $ext = $this->where('id',$userId)->find();
+            if($ext['is_admin'] == 1){
+                return modelReMsg(-2, '', '管理员用户不可删除');
+            }
+
+
+            $this->where('id', $userId)->delete();
+        } catch (\Exception $e) {
+
+            return modelReMsg(-1, '', $e->getMessage());
+        }
+
+        return modelReMsg(0, '', '删除成功');
+    }
+
+    public function getUserById($userId)
+    {
+        try {
+
+            $info = $this->where('id', $userId)->findOrEmpty()->toArray();
+        }catch (\Exception $e) {
+
+            return modelReMsg(-1, '', $e->getMessage());
+        }
+
+        return modelReMsg(0, $info, 'ok');
+    }
+
 }

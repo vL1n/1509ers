@@ -7,7 +7,6 @@ namespace app\api\controller\v1;
 
 
 use app\common\auth\jwt;
-use app\common\controller\File;
 use app\common\error\apiErrCode;
 use app\common\jsonResponse\JsonResponse;
 use think\cache\driver\Redis;
@@ -128,5 +127,17 @@ class User extends Controller
             Session::delete('web-token');
         }
         return $this->jsonSuccess();
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function getAllUser(Request $request){
+
+        $user = new \app\common\model\User();
+        $res = $user->getAllUser();
+        $data = json_decode($res,true);
+        return $this->jsonSuccess($data);
     }
 }

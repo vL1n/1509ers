@@ -53,4 +53,9 @@ class apiErrCode
     const ERR_FILE_TYPE     =   [1051, '错误的文件格式'];
     const ERR_FILE_SIZE     =   [1052, '文件过大！'];
     const FILE_NOEXIST      =   [1053, '文件不存在!'];
+
+    /**
+     * 用户
+     */
+    const  NO_USER          =   [1100, '无用户'];
 }

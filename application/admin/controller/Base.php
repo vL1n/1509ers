@@ -9,12 +9,19 @@
 namespace app\admin\controller;
 
 use think\Controller;
+use think\facade\Config;
+use think\facade\Cookie;
 use tool\Auth;
 
 class Base extends Controller
 {
     public function initialize()
     {
+        $secret = Config::get('secret');
+        $time = time();
+        $sign = md5($time.$secret);
+        Cookie::set('signA',['time'=>$time,'sign'=>$sign]);
+
         if(empty(session('admin_user_name'))){
 
             $this->redirect(url('login/index'));

@@ -8,8 +8,8 @@
  */
 namespace app\admin\controller;
 
-use app\admin\model\Operate;
-use app\admin\model\LoginLog;
+use app\common\model\Operate;
+use app\common\model\LoginLog;
 
 class Log extends Base
 {

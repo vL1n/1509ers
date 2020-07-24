@@ -8,8 +8,8 @@
  */
 namespace app\admin\controller;
 
-use app\admin\model\Admin;
-use app\admin\model\LoginLog;
+use app\common\model\Admin;
+use app\common\model\LoginLog;
 use think\Controller;
 
 class Login extends Controller

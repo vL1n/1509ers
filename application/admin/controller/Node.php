@@ -8,7 +8,7 @@
  */
 namespace app\admin\controller;
 
-use app\admin\model\Node as NodeModel;
+use app\common\model\Node as NodeModel;
 use app\admin\validate\NodeValidate;
 use tool\Log;
 

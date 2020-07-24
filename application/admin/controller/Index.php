@@ -8,7 +8,7 @@
  */
 namespace app\admin\controller;
 
-use app\admin\model\Admin;
+use app\common\model\Admin;
 use think\App;
 use tool\Auth;
 

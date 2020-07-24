@@ -8,7 +8,7 @@
  */
 namespace app\admin\controller;
 
-use app\admin\model\Role as RoleModel;
+use app\common\model\Role as RoleModel;
 use tool\Log;
 
 class Role extends Base
@@ -138,7 +138,7 @@ class Role extends Base
         $roleId = input('param.id');
         $roleInfo = (new RoleModel())->getRoleInfoById($roleId)['data'];
 
-        $tree = (new \app\admin\model\Node())->getNodesTree($roleId)['data'];
+        $tree = (new \app\common\model\Node())->getNodesTree($roleId)['data'];
 
         $this->assign([
             'tree' => $tree,
