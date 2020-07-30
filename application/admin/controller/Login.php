@@ -64,6 +64,6 @@ class Login extends Controller
         session('admin_user_name', null);
         session('admin_user_id', null);
 
-        $this->redirect(url('login/index'));
+        $this->redirect(url('user/index'));
     }
 }

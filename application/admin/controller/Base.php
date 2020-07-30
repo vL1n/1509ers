@@ -24,7 +24,7 @@ class Base extends Controller
 
         if(empty(session('admin_user_name'))){
 
-            $this->redirect(url('login/index'));
+            $this->redirect(url('user/index'));
         }
 
         $controller = lcfirst(request()->controller());

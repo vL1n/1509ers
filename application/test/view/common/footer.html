@@ -1,58 +1,20 @@
-<style>
-    .user_avatar{
-        color:#ffffff;
-        overflow: hidden;
-        z-index: 9999;
-        position: fixed;
-        padding:5px;
-        text-align:center;
-        width: 60px;
-        height: 85px;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        left: 10px;
-        bottom: 10px;
-    }
-    .user_avatar:hover {
-        padding: 5px;
-        border: 2px solid #0f6674;
-        border-radius: 7px;
-        background-color:rgba(0,0,0,0.5)
-    }
-    .user_avatar1 {
-        padding: 5px;
-        border: 2px solid transparent;
-        border-radius: 7px;
-    }
-</style>
-<footer class="site-footer footer-content-light footer-mobile-content-light">
-    <div class="overlay">
-        <div class="overlay-inner bg-white"></div>
-    </div>
-    <div class="container socials-container">
-<!--        <nav class="socials-icons">-->
-<!--            <ul class="mx-auto">-->
-<!--                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>-->
-<!--                <li><a href="#"><i class="fab fa-twitter"></i></a></li>-->
-<!--                <li><a href="#"><i class="fab fa-instagram"></i></a></li>-->
-<!--                <li><a href="#"><i class="fab fa-pinterest"></i></a></li>-->
-<!--            </ul>-->
-<!--        </nav>-->
-        <div class="user_avatar" onclick="hello()">
-            <img src="/static/img/bz.ico" alt="" style="width: 50px;">
-            <p style="text-align: center;">未登录</p>
+<footer class="grid-footer">
+    <div class="footer-fixed">
+        <div class="copyright">
+            <div class="info">
+<!--                <div class="contact">-->
+<!--                    <a href="javascript:void(0)" class="github" target="_blank"><i class="fa fa-github"></i></a>-->
+<!--                    <a href="https://wpa.qq.com/msgrd?v=3&uin=930054439&site=qq&menu=yes" class="qq" target="_blank" title="930054439"><i class="fa fa-qq"></i></a>-->
+<!--                    <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=gbiysbG0tbWyuMHw8K-i7uw" class="email" target="_blank" title="930054439@qq.com"><i class="fa fa-envelope"></i></a>-->
+<!--                    <a href="javascript:void(0)" class="weixin"><i class="fa fa-weixin"></i></a>-->
+<!--                </div>-->
+                <img src="/static/logo.png" alt="1509ers" width="100px;" style="filter: brightness(50%);">
+                <p class="mt05">
+                    <strong>Copyright &copy; 2019 <b>by Weilin Qin</b></strong>
+                    All rights reserved.
+                </p>
+                <p class="mt04"><b>备案号:</b> 桂ICP备20002069号</p>
+            </div>
         </div>
-
-    </div>
-    <div class="container copyright-container">
-        <p>© 2020 1509ers - All Rights Reserved</p>
-        <p><b>备案号:</b> 桂ICP备20002069号</p>
     </div>
 </footer>
-<script>
-    function hello() {
-        alert('hello')
-    }
-</script>

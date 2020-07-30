@@ -44,6 +44,7 @@ class apiErrCode
     const ILLEGAL_REQUEST   =   [1017, '非法请求'];
     const REQUEST_TIME_OUT  =   [1018, '请求超时'];
     const ILLEGAL_SIGN      =   [1019, '非法签名'];
+    const NO_TOKEN          =   [1020, '无token'];
 
     /**
      * 上传异常
