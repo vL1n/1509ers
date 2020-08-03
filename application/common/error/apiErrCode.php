@@ -18,18 +18,17 @@ class apiErrCode
     const ERR_SUBMIT        =   [1001, '提交异常'];
     const USR_NOEXIST       =   [1002, '用户名不存在'];
     const ERR_PASSWORD      =   [1003, '密码错误'];
-    const ERR_BLANK         =   [1004, '有项目未填写'];
+    const ERR_BLANK         =   [1004, '必填项不能为空'];
     const USR_FORBID        =   [1005, '用户被禁用'];
     const USR_ID_NOEXIST    =   [1006, '用户id不存在'];
     const SCHOOL_ID_EXIST   =   [1007, '学号已存在,请勿重复注册'];
-    const ERR_LOGIN_TYPE    =   [1008, '错误的登陆方式'];
-    const PHONE_CHECK_FAILED =  [1009, '未绑定手机号或手机号未验证'];
-    const PWD_NOT_CHANGED   =   [1010, '未更改初始密码'];
-    const REQUEST_FREQUENTLY =  [1011, '请求过于频繁，请稍后再试'];
-    const SMS_5_ALLOWED_A_DAY=  [1012, '一个用户每天最多只被允许请求5次短信服务'];
-    const SMS_TIME_OUT      =   [1013, '验证码过期'];
-    const SMS_OR_PHONE_ERROR=   [1014, '验证码或者手机号错误'];
-    const SMS_USED          =   [1015, '验证码已使用'];
+    const ERR_LOGIN_TYPE    =   [1008, '错误的登陆方式,请使用学号/邮箱地址/手机号登录'];
+    const PWD_PHONE_NEED_CHECK= [1009, '手机号需要绑定或初始密码需要修改'];
+    const REQUEST_FREQUENTLY =  [1010, '请求过于频繁，请稍后再试'];
+    const SMS_5_ALLOWED_A_DAY=  [1011, '一个用户每天最多只被允许请求5次短信服务'];
+    const SMS_TIME_OUT      =   [1012, '验证码过期'];
+    const SMS_OR_PHONE_ERROR=   [1013, '验证码或者手机号错误'];
+    const SMS_USED          =   [1014, '验证码已使用'];
 
     /**
      * Token检验异常

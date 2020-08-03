@@ -1,56 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="__SRC__/layui/css/layui.css"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>1509ers</title>
+    <meta name="keywords" content="1509ers">
+    <meta name="description" content="1509ers">
+    <link rel="shortcut icon" href="/static/index/img/bz.ico">
+    <link rel="apple-touch-icon-precomposed" href="/static/index/img/bz.ico">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-4.2.1.css">
+    <link rel="stylesheet" href="__SRC__/css/style.default.css" id="theme-stylesheet">
+    <link href="__SRC__/css/Eject.css" rel="stylesheet">
 </head>
 <body>
-<div class="doc-container">
-    <div class="container-fixed" style="padding: 30px;margin-left: -50px">
-        <form class="layui-form" action="">
-            <div class="layui-form-item">
-                <label class="layui-form-label">输入框</label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off"
-                           class="layui-input">
+<div class="page login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <input type="text" value="" id="uid" name="id" hidden>
+            <div class="row" id="loginRow">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>欢迎登录</h1>
+                            </div>
+                            <p>1509ers.com</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-6 bg-white">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <form class="form-validate" id="loginForm">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert" style="display: none">
+                                    <b id="alertMsg"></b>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <label>用户名：</label>
+                                <div class="form-group">
+                                    <input id="login-username" type="text" name="account" required data-msg="请输入学号|手机号|邮箱地址" placeholder="学号|手机号|邮箱地址" class="input-material">
+                                </div>
+                                <label>密码：</label>
+                                <div class="form-group">
+                                    <input id="login-password" type="password" name="password" required data-msg="请输入密码" placeholder="密码" class="input-material">
+                                </div>
+                                <div style="text-align: center">
+                                    <button id="loginBtn" type="button" class="btn btn-primary" style="width: 200px;">登录</button>
+                                </div>
+                            </form>
+                            <br/>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">密码框</label>
-                <div class="layui-input-inline">
-                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
-                           autocomplete="off" class="layui-input">
+            <div class="row" id="phoneCheckRow" style="display: none">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>手机号验证</h1>
+                            </div>
+                            <p>1509ers.com</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-6 bg-white">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <form class="form-validate" id="phoneCheckForm">
+                                <blockquote class="blockquote">
+                                    <p class="mb-0">1/2 -- 绑定手机</p>
+                                </blockquote>
+<!--                                绑定手机提示-->
+                                <div class="alert alert-info" role="alert">
+                                    您需要绑定您的手机才能继续访问
+                                </div>
+<!--                                验证码声明-->
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    为了节约成本，短信验证码<strong>三分钟内仅能请求一次</strong>，每天<strong>最多只能请求5次</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+<!--                                信息提示框-->
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="phoneCheckAlert" style="display: none">
+                                    <b id="phoneCheckAlertMsg"></b>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <label>请输入你的手机号：</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="手机号" aria-label="手机号" aria-describedby="button-addon2" id="phoneNumber">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">发送验证码</button>
+                                    </div>
+                                </div>
+                                <label>请输入你收到的验证码：</label>
+                                <div class="form-group">
+                                    <input id="code1" type="text" name="code1" required data-msg="不能为空" placeholder="" class="input-material" style="width: 15%;text-align: center">
+                                    <input id="code2" type="text" name="code2" required data-msg="不能为空" placeholder="" class="input-material" style="width: 15%;text-align: center">
+                                    <input id="code3" type="text" name="code3" required data-msg="不能为空" placeholder="" class="input-material" style="width: 15%;text-align: center">
+                                    <input id="code4" type="text" name="code4" required data-msg="不能为空" placeholder="" class="input-material" style="width: 15%;text-align: center">
+                                    <input id="code5" type="text" name="code5" required data-msg="不能为空" placeholder="" class="input-material" style="width: 15%;text-align: center">
+                                    <input id="code6" type="text" name="code6" required data-msg="不能为空" placeholder="" class="input-material" style="width: 15%;text-align: center">
+                                </div>
+                                <div style="text-align: center">
+                                    <button id="phoneCheckBtn" type="button" class="btn btn-primary" style="width: 200px;">验证</button>
+                                </div>
+                            </form>
+                            <br/>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">记住我</label>
-                <div class="layui-input-block">
-                    <input type="checkbox" name="switch" lay-skin="switch">
+            <div class="row" id="pwdChangeRow" style="display: none">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>修改初始密码</h1>
+                            </div>
+                            <p>1509ers.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 bg-white">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <form class="form-validate" id="pwdChangeForm">
+                                <blockquote class="blockquote">
+                                    <p class="mb-0">2/2 -- 修改初始密码</p>
+                                </blockquote>
+                                <!--                                修改初始密码提示-->
+                                <div class="alert alert-info" role="alert">
+                                    您需要修改您的初始密码才能继续访问
+                                </div>
+                                <!--                                信息提示框-->
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="pwdChangeAlert" style="display: none">
+                                    <b id="pwdChangeAlertMsg"></b>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <label>新密码：</label>
+                                <div class="form-group">
+                                    <input id="new_password" type="password" name="new_password" required data-msg="请输入新密码" placeholder="新密码" class="input-material">
+                                </div>
+                                <label>再次输入新密码：</label>
+                                <div class="form-group">
+                                    <input id="new_password_confirm" type="password" name="new_password_confirm" required data-msg="请再次输入输入密码" placeholder="再次输入新密码" class="input-material">
+                                </div>
+
+                                <div style="text-align: center">
+                                    <button id="pwdChangeBtn" type="button" class="btn btn-primary" style="width: 200px;">修改</button>
+                                </div>
+                            </form>
+                            <br/>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
+<!-- JavaScript files-->
+<script  src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+<script src="__SRC__/vendor/jquery-validation/jquery.validate.min.js"></script><!--表单验证-->
+<script src="__SRC__/js/eject.js"></script>
+<script src="__SRC__/js/login.js"></script>
 </body>
-<script src="__SRC__/layui/layui.js"></script>
-<script>
-    //Demo
-    layui.use('form', function () {
-        var form = layui.form;
-
-        //监听提交
-        form.on('submit(formDemo)', function (data) {
-            layer.msg(JSON.stringify(data.field));
-            return false;
-        });
-    });
-</script>
 </html>

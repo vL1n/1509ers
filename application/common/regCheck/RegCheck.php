@@ -50,7 +50,7 @@ trait regCheck
      */
     function is_school_id($school_id){
         if(preg_match("/^[1-9][0-9]*$/" ,$school_id)){
-            if($school_id>0 && $school_id<99){
+            if($school_id>150900 && $school_id<150999){
                 return true;
             }
             return false;

@@ -4,6 +4,7 @@
 namespace app\api\controller\v1;
 
 
+use app\api\validate\Password;
 use app\common\auth\jwt;
 use app\common\error\apiErrCode;
 use app\common\jsonResponse\JsonResponse;
@@ -34,17 +35,22 @@ class Utils extends Controller
         $user = new User();
         $log = new LoginLog();
 
+        // 查看是否提交空表单
+        if($info['account'] == '' || $info['password'] == ''){
+            return $this->jsonApiError(apiErrCode::ERR_BLANK);
+        }
+
         // 判断登陆方式(学号|邮箱|手机号)
         $account = $info['account'];
-        $type = $this->check_type($account);
+        $loginType = $this->check_type($account);
 
         // 非手机号/邮箱/学号登陆
-        if($type = ''){
+        if($loginType == ''){
             return $this->jsonApiError(apiErrCode::ERR_LOGIN_TYPE);
         }
 
         // 带数据进数据库查询
-        $userInfo = $user->getUserInfoByField($type,$account);
+        $userInfo = $user->getUserInfoByField($loginType,$account);
         $userInfo_decode = json_decode($userInfo,true);
 
         // 模型返回异常
@@ -54,18 +60,22 @@ class Utils extends Controller
 
         // 密码错误
         if(md5($info['password']) != $userInfo_decode['data']['password']){
-            $log->writeLoginLog($userInfo_decode['real_name'],2);
+            $log->writeLoginLog($userInfo_decode['data']['real_name'],2);
             return $this->jsonApiError(apiErrCode::ERR_PASSWORD);
         }
 
-        // 账号密码正确,检查是否未绑定手机号
-        if ($userInfo_decode['phone_checked'] == '0'){
-            return $this->jsonApiError(apiErrCode::PHONE_CHECK_FAILED);
-        }
-
-        //检查初始密码是否已经更改
-        if ($userInfo_decode['pwd_changed'] == '0'){
-            return $this->jsonApiError(apiErrCode::PWD_NOT_CHANGED);
+        // 手机号未绑定或者账号密码未修改
+        if($userInfo_decode['data']['phone_checked'] == '0' || $userInfo_decode['data']['pwd_changed'] == '0'){
+            $data = ['phone_checked'=>1,'pwd_changed'=>1,'uid'=>$userInfo_decode['data']['id']];
+            // 账号密码正确,检查是否未绑定手机号
+            if ($userInfo_decode['data']['phone_checked'] == '0'){
+                $data['phone_checked']=0;
+            }
+            //检查初始密码是否已经更改
+            if ($userInfo_decode['data']['pwd_changed'] == '0'){
+                $data['pwd_changed']=0;
+            }
+            return $this->jsonApiError(apiErrCode::PWD_PHONE_NEED_CHECK,$data);
         }
 
         /**
@@ -75,7 +85,7 @@ class Utils extends Controller
         $uid = $userInfo_decode['data']['id'];
         $user->where('id',$uid)->setInc('login_count');
         $user->updateUserInfoById($uid,['last_login'=>time()]);
-        $user->where('id',$uid)->insert(['last_ip'=>$request->ip()]);
+        $user->where('id',$uid)->update(['last_ip'=>$request->ip()]);
 
         // 开始制作token
         $jwt = jwt::getInstance();
@@ -83,6 +93,7 @@ class Utils extends Controller
 
         // 把token写入redis
         $redis = new Redis();
+
         // 判断登陆app
         $inapp = $request->InApp;
         if($inapp == 'mobile'){
@@ -92,9 +103,9 @@ class Utils extends Controller
             $redis->setex($uid.'_'.'web_token',604800,$token);
             Session::set('web_token',$token);
         }
-        // 写入login_log
 
-        $log->writeLoginLog($userInfo_decode['real_name'],1);
+        // 写入login_log
+        $log->writeLoginLog($userInfo_decode['data']['real_name'],1);
 
         return $this->jsonSuccess([
             'token' => $token
@@ -119,6 +130,17 @@ class Utils extends Controller
         // 初始化模型
         $sms = new Sms();
 
+        // 初始化验证器
+        $validate = new \app\api\validate\SMS();
+
+        $need_validate = [
+            'phone'=>$phone,
+            'id'=>$uid
+        ];
+        if (!$validate->check($need_validate)) {
+            return $this->jsonData(apiErrCode::ERR_SYSTEM[0],$validate->getError());
+        }
+
         // 获取今天内该请求ip申请的短信验证码次数
         $res = $sms->where('request_ip',$ip)->whereTime('time','today')->count();
         // 获取该ip最近的一次短信验证码数据
@@ -127,8 +149,8 @@ class Utils extends Controller
 
         if($res || $res2){
             // 如果距离上一次请求不足3分钟，则拒绝访问
-            if(strtotime($res2['time']) - time() < 180){
-                return $this->jsonApiError(apiErrCode::REQUEST_FREQUENTLY);
+            if(time() - strtotime($res2['time']) < 180){
+                return $this->jsonApiError(apiErrCode::REQUEST_FREQUENTLY,[strtotime($res2['time']),time()]);
             }
             // 如果同一个ip同一天内请求次数超过了5次,则拒绝访问
             if ($res >= 5) {
@@ -170,7 +192,6 @@ class Utils extends Controller
 
         $info = $request->param();
         $phone = $info['phone'];
-        $uid = $info['id'];
         $ip = $request->ip();
         $code = $info['code'];
 
@@ -187,6 +208,7 @@ class Utils extends Controller
 
         // 初始化模型
         $sms = new Sms();
+        $user = new User();
 
         // 根据手机号从数据库中获取该手机最新的一条验证码信息,find()函数只返回一条信息，time desc 为根据时间倒序寻找，也就是最新一条
         $sms_info = $sms->where('phone_number',$phone)->order('time desc')->find();
@@ -208,6 +230,63 @@ class Utils extends Controller
         }
         // 以上三判断通过，写入数据库更新该条验证码信息,返回成功
         $sms->where('id',$sms_info['id'])->update(['used'=>1]);
+
+        return $this->jsonSuccess();
+    }
+
+    /**
+     * @param Request $request
+     * @return false|string
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
+    public function bindPhoneToAccount(Request $request){
+
+        $info = $request->param();
+        $uid = $info['id'];
+        $phone = $info['phone'];
+
+        // 初始化验证器
+        $validate = new \app\api\validate\SMS();
+
+        $data_need_validate = [
+            'id'=>$uid,
+            'phone'=>$phone
+        ];
+
+        // 验证传来的数据
+        if(!$validate->check($data_need_validate)){
+            return $this->jsonData(apiErrCode::ERR_SYSTEM[0],$validate->getError());
+        }
+
+        // 初始化模型
+        $user = new User();
+        $user->where('id',$uid)->update(['phone'=>$phone,'phone_checked'=>'1']);
+
+        return $this->jsonSuccess();
+    }
+
+    public function pwdChange(Request $request){
+        $info = $request->param();
+        $new_password = $info['new_password'];
+        $new_password_confirm = $info['new_password_confirm'];
+        $uid = $info['id'];
+
+        // 需要验证的数据
+        $data_need_validate = [
+            'password'=>$new_password,
+            'password_confirm'=>$new_password_confirm
+        ];
+
+        // 验证
+        $validate = new Password();
+        if(!$validate->check($data_need_validate)){
+            return $this->jsonData(apiErrCode::ERR_SYSTEM[0],$validate->getError());
+        }
+
+        // 验证通过，写入数据库
+        $user = new User();
+        $user->where('id',$uid)->update(['password'=>md5($new_password),'pwd_changed'=>1]);
 
         return $this->jsonSuccess();
     }
