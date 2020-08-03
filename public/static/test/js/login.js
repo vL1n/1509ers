@@ -23,7 +23,7 @@ $(function () {
         $("#alertMsg").text('')
         $.ajax({
             type: 'POST',
-            url: "{:url('/api/v1/Utils/userLogin')}",
+            url: "/api/v1/Utils/userLogin",
             data: $("#loginForm").serialize(),
             dataType: "JSON",
             success: function (res) {
@@ -101,7 +101,7 @@ $(function () {
         $("#button-addon2").attr({"disabled":"disabled"})
         $.ajax({
             type: 'POST',
-            url: "{:url('/api/v1/Utils/sendSMS')}",
+            url: "/api/v1/Utils/sendSMS",
             data: {
                 phone : $('#phoneNumber').val(),
                 id : $('#uid').val()
@@ -134,7 +134,7 @@ $(function () {
         });
         $.ajax({
             type: 'POST',
-            url: "{:url('/api/v1/Utils/validateSMS')}",
+            url: "/api/v1/Utils/validateSMS",
             data: {
                 phone: $('#phoneNumber').val(),
                 code: code
@@ -161,7 +161,7 @@ function bindPhone(phone, id) {
     $("#phoneCheckAlertMsg").text('')
     $.ajax({
         type: 'POST',
-        url: "{:url('/api/v1/Utils/bindPhoneToAccount')}",
+        url: "/api/v1/Utils/bindPhoneToAccount",
         data: {
             phone: phone,
             id: id
@@ -194,7 +194,7 @@ $(function () {
         $("#pwdChangeAlertMsg").text('')
         $.ajax({
             type: 'POST',
-            url: "{:url('/api/v1/Utils/pwdChange')}",
+            url: "/api/v1/Utils/pwdChange",
             data: {
                 new_password: $('#new_password').val(),
                 new_password_confirm: $('#new_password_confirm').val(),

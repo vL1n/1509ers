@@ -18,5 +18,5 @@ return [
     'Token' => app\http\Middleware\Token::class,
     'InAppCheck'=> app\http\Middleware\InAppCheck::class,
     'SignCheck'=>app\http\Middleware\SignCheck::class,
-    'WebLoginCheck'=>app\http\Middleware\WebLoginCheck::class
+    'WebAuth'=>app\http\Middleware\WebAuth::class
 ];

@@ -42,10 +42,11 @@ master.start = function ($) {
 
     $.get('/test/User/getUserName',function (res) {
         var data = JSON.parse(res)
-        console.log(data)
         if(data.code == '0'){
+            var avatar_path = data.data.avatar_path
+            avatar_path = avatar_path.replace(".","")
             $("#avatar_img").show()
-            $("#avatar_img").attr('src','.'+data.data.avatar_path)
+            $("#avatar_img").attr('src',avatar_path)
             $("#login_btn").hide()
         }else {
             $("#avatar_img").hide()
